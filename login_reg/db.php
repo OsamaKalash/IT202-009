@@ -12,7 +12,7 @@ function getDB(){
         try{
             //__DIR__ helps get the correct path regardless of where the file is being called from
             //it gets the absolute path to this file, then we append the relative url (so up a directory and insid>
-            require_once(__DIR__. "/home/ok44/public_html/IT202-009/lib/config.php");//pull in our credentials
+            require_once(__DIR__. "/../lib/config.php");//pull in our credentials
             //use the variables from config to populate our connection
             $connection_string = "mysql:host=$dbhost;dbname=$dbdatabase;charset=utf8mb4";
             //using the PDO connector create a new connect to the DB
