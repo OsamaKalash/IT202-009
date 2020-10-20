@@ -6,11 +6,12 @@ if (isset($_SESSION["user"]) && isset($_SESSION["user"]["email"])) {
     $email = $_SESSION["user"]["email"];
 }
 ?>
-<p>
+<?php
 if($email == ""){
-    <?php echo please log in?>
+<p><?php echo please log in?></p>
 }
 else{
-    Welcome, <?php echo $email; ?>
+<p>Welcome, <?php echo $email; ?></p>
 }
 </p>
+?>
