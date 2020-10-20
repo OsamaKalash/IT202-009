@@ -28,7 +28,7 @@ if (isset($_POST["login"])) {
         $db = getDB();
         if (isset($db)) {
 	    if($username != null) {
-            	$stmt = $db->prepare("SELECT id, username, password from Users WHERE email = :email LIMIT 1");
+            	$stmt = $db->prepare("SELECT id, username, password from Users WHERE email = :username LIMIT 1");
             	$params = array(":email" => $username);
            
                 $stmt = $db->prepare("SELECT id, username, password from Users WHERE username  = :username LIMIT 1");
