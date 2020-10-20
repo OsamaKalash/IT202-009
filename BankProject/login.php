@@ -40,7 +40,7 @@ if (isset($_POST["login"])) {
             if($username != null) {
                $stmt = $db->prepare{"SELECT id, email, username, password from Users WHERE username  = :username LIMIT 1"};
 	       $params = array(":username" => $username);
-
+            }
             $r = $stmt->execute($params);
             // echo "db returned: " . var_export($r, true);
             $e = $stmt->errorInfo();
