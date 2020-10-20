@@ -2,6 +2,8 @@
 <form method="POST">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required/>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required/>
     <label for="p1">Password:</label>
     <input type="password" id="p1" name="password" required/>
     <input type="submit" name="login" value="Login"/>
@@ -32,7 +34,7 @@ if (isset($_POST["login"])) {
 
             $params = array(":email" => $email);
             $r = $stmt->execute($params);
-            echo "db returned: " . var_export($r, true);
+           // echo "db returned: " . var_export($r, true);
             $e = $stmt->errorInfo();
             if ($e[0] != "00000") {
                 echo "uh oh something went wrong: " . var_export($e, true);
