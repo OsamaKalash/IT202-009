@@ -1,5 +1,7 @@
 <?php require_once(__DIR__ . "/partials/nav.php"); ?>
 <form method="POST">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required/>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required/>
     <label for="p1">Password:</label>
@@ -9,10 +11,12 @@
 
 <?php
 if (isset($_POST["login"])) {
-    
+    $email = null;
     $password = null;
     $username = null;
-    
+    if (isset($_POST["email"])) {
+        $email = $_POST["email"];
+    }
     if (isset($_POST["password"])) {
         $password = $_POST["password"];
     }
@@ -20,20 +24,23 @@ if (isset($_POST["login"])) {
         $username = $_POST["username"];
     }
     $isValid = true;
-    if (!isset($username) || !isset($password)) {
+    if (!isset($email) || !isset($password)) {
         $isValid = false;
     }
-   
+    if (!strpos($email, "@")) {
+        $isValid = false;
+        echo "<br>Invalid email<br>";
+    }
     if ($isValid) {
         $db = getDB();
         if (isset($db)) {
-	    if($username != null) {
-            	$stmt = $db->prepare("SELECT id, username, password from Users WHERE email = :username LIMIT 1");
-            	$params = array(":email" => $username);
-           
-                $stmt = $db->prepare("SELECT id, username, password from Users WHERE username  = :username LIMIT 1");
-	        $params = array(":username" => $username);
-	    }
+            $stmt = $db->prepare("SELECT id, email, username, password from Users WHERE email = :email LIMIT 1");
+
+            $params = array(":email" => $email);
+            if($username != null) {
+               $stmt = $db->prepare("SELECT id, email, username, password from Users WHERE username  = :username LIMIT 1");
+	       $params = array(":username" => $username);
+            }
             $r = $stmt->execute($params);
             // echo "db returned: " . var_export($r, true);
             $e = $stmt->errorInfo();
