@@ -5,13 +5,12 @@ $email = "";
 if (isset($_SESSION["user"]) && isset($_SESSION["user"]["email"])) {
     $email = $_SESSION["user"]["email"];
 }
-?>
-<?php
+
 if($email == ""){
-<p><?php echo please log in?></p>
+<p>Please log in</p>;
 }
 else{
-<p>Welcome, <?php echo $email; ?></p>
+<p>Welcome, <?php echo $email; ?></p>;
 }
-</p>
+
 ?>
