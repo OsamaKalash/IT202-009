@@ -13,11 +13,15 @@
 if (isset($_POST["login"])) {
     $email = null;
     $password = null;
+    $username = null;
     if (isset($_POST["email"])) {
         $email = $_POST["email"];
     }
     if (isset($_POST["password"])) {
         $password = $_POST["password"];
+    }
+    if (isset($_POST["username"])) {
+        $username = $_POST["username"];
     }
     $isValid = true;
     if (!isset($email) || !isset($password)) {
@@ -33,12 +37,17 @@ if (isset($_POST["login"])) {
             $stmt = $db->prepare("SELECT id, email, username, password from Users WHERE email = :email LIMIT 1");
 
             $params = array(":email" => $email);
+            if($username != null) {
+               $stmt = $db->prepare{"SELECT id, email, username, password from Users WHERE email = :username LIMIT 1"};
+	       $params = array(":username" => $username);
+
             $r = $stmt->execute($params);
-           // echo "db returned: " . var_export($r, true);
+            // echo "db returned: " . var_export($r, true);
             $e = $stmt->errorInfo();
             if ($e[0] != "00000") {
                 echo "uh oh something went wrong: " . var_export($e, true);
             }
+
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result && isset($result["password"])) {
                 $password_hash_from_db = $result["password"];
