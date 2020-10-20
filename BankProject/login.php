@@ -29,7 +29,7 @@ if (isset($_POST["login"])) {
         if (isset($db)) {
 	    if($username != null) {
             	$stmt = $db->prepare("SELECT id, username, password from Users WHERE email = :email LIMIT 1");
-            	$params = array(":email" => $email);
+            	$params = array(":email" => $username);
            
                 $stmt = $db->prepare("SELECT id, username, password from Users WHERE username  = :username LIMIT 1");
 	        $params = array(":username" => $username);
