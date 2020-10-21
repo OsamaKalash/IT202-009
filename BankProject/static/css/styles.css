@@ -74,11 +74,11 @@ input:nth-of-type(3) {
 input:nth-of-type(4) {
     margin-left: 1px !important;
     margin-right: 1px !important;
-    
+    outline: none;
 }
 
 input:nth-of-type(5) {
     margin-left: 1px !important;
     margin-right: 1px !important;
-    
+    outline: none;
 }
