@@ -6,6 +6,7 @@
 session_unset();
 // destroy the session
 session_destroy();
+header("Location: login.php");
 echo "You've been logged out<br>";
 //echo "<pre>" . var_export($_SESSION, true) . "</pre>";
 ?>
