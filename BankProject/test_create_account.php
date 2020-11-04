@@ -31,15 +31,13 @@ if(isset($_POST["save"])){
 	$account_number = $_POST["account_number"];
 	$account_type = $_POST["account_type"];
 	$balance = $_POST["balance"];
-	$nst = date('Y-m-d H:i:s');//calc
 	$user = get_user_id();
 	$db = getDB();
-	$stmt = $db->prepare("INSERT INTO Accounts (account_number, account_type, last_updated, opened_date, balance, user_id) VALUES(:account_number, :account_type, :balance, :nst,:user)");
+	$stmt = $db->prepare("INSERT INTO Accounts (account_number, account_type, balance, user_id) VALUES(:account_number, :account_type, :balance, :user)");
 	$r = $stmt->execute([
 		":account_number"=>$account_number,
 		":account_type"=>$account_type,
 		":balance"=>$balance,
-		":nst"=>$nst,
 		":user"=>$user
 	]);
 	if($r){

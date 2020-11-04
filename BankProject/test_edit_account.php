@@ -19,17 +19,17 @@ if(isset($_POST["save"])){
 	$account_number = $_POST["account_number"];
 	$account_type = $_POST["account_type"];
 	$balance = $_POST["balance"];
-	$nst = date('Y-m-d H:i:s');//calc
+	
 	$user = get_user_id();
 	$db = getDB();
 	if(isset($id)){
-		$stmt = $db->prepare("UPDATE Accounts set account_number=:account_number, account_type=:account_type, balance=:balance, opened_date=:nst, last_updated=:nst where id=:id");
+		$stmt = $db->prepare("UPDATE Accounts set account_number=:account_number, account_type=:account_type, balance=:balance where id=:id");
 		//$stmt = $db->prepare("INSERT INTO Accounts (name, state, base_rate, mod_min, mod_max, next_stage_time, user_id) VALUES(:name, :state, :br, :min,:max,:nst,:user)");
 		$r = $stmt->execute([
 			":account_number"=>$account_number,
 			":account_type"=>$account_type,
 			":balance"=>$balance,
-			":nst"=>$nst,
+			
 			":id"=>$id
 		]);
 		if($r){
