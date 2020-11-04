@@ -69,7 +69,7 @@ if(isset($id)){
 	</select>
 	<label>Balance</label>
 	<input type="number" min="0.00" name="balance" step="0.01" value="<?php echo $result["balance"];?>" />
-	
+	<input type="submit" name="save" value="Update"/>
 </form>
 
 
