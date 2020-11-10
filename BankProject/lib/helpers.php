@@ -69,4 +69,22 @@ function getMessages() {
 }
 
 //end flash
+
+function getType($n) {
+    switch ($n) {
+        case 0:
+            echo "Checking";
+            break;
+        case 1:
+            echo "Saving";
+            break;
+        case 2:
+            echo "Loan";
+            break;
+        default:
+            echo "Unsupported type: " . safer_echo($n);
+            break;
+    }
+}
+
 ?>
