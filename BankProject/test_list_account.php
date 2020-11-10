@@ -39,7 +39,7 @@ if (isset($_POST["search"]) && !empty($query)) {
                     </div>
                     <div>
                         <div>Account Type:</div>
-                        <div><?php getType($r["account_type"]); ?></div>
+                        <div><?php getAccType($r["account_type"]); ?></div>
                     </div>
                     <div>
                         <div>Balance</div>

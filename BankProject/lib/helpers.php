@@ -70,7 +70,7 @@ function getMessages() {
 
 //end flash
 
-function getType($n) {
+function getAccType($n) {
     switch ($n) {
         case 0:
             echo "Checking";
