@@ -39,23 +39,11 @@ if (isset($_POST["search"]) && !empty($query)) {
                     </div>
                     <div>
                         <div>Account Type:</div>
-                        <div><?php safer_echo($r["account_type"]); ?></div>
+                        <div><?php getType($r["account_type"]); ?></div>
                     </div>
                     <div>
                         <div>Balance</div>
                         <div><?php safer_echo($r["balance"]); ?></div>
-                    </div>
-                    <div>
-                        <div>User Id:</div>
-                        <div><?php safer_echo($r["user_id"]); ?></div>
-                    </div>
-					<div>
-                        <div>Date Opened:</div>
-                        <div><?php safer_echo($r["opened_date"]); ?></div>
-                    </div>
-					<div>
-                        <div>Last Updated:</div>
-                        <div><?php safer_echo($r["last_updated"]); ?></div>
                     </div>
                     <div>
                         <a type="button" href="test_edit_account.php?id=<?php safer_echo($r['id']); ?>">Edit</a>
