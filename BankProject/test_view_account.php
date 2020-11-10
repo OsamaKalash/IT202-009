@@ -29,14 +29,14 @@ if (isset($id)) {
 <?php if (isset($result) && !empty($result)): ?>
     <div class="card">
         <div class="card-title">
-            <?php safer_echo($result["account_number"]); ?>
+            <p>Account Info:</p>
         </div>
         <div class="card-body">
             <div>
-                <p>Info</p>
+				<div>Account Number: <?php safer_echo($result["account_number"]); ?></div>
                 <div>Account Type: <?php getType($result["account_type"]); ?></div>
                 <div>Balance: <?php safer_echo($result["balance"]); ?></div>
-                <div>Date Opened: <?php getState($result["opened_date"]); ?></div>
+                <div>Date Opened: <?php safer_echo($result["opened_date"]); ?></div>
                 <div>Last Updated: <?php safer_echo($result["last_updated"]); ?></div>
                 <div>User ID: <?php safer_echo($result["user_id"]); ?></div>
             </div>
