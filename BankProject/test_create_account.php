@@ -1,52 +1,90 @@
-<?php require_once(__DIR__ . "/partials/nav.php"); ?>
 <?php
-if (!has_role("Admin")) {
-    //this will redirect to login and kill the rest of this script (prevent it from executing)
-    flash("You don't have permission to access this page");
-    die(header("Location: login.php"));
+session_start();//we can start our session here so we don't need to worry about it on other pages
+require_once(__DIR__ . "/db.php");
+//this file will contain any helpful functions we create
+//I have provided two for you
+function is_logged_in() {
+    return isset($_SESSION["user"]);
 }
-?>
 
-<form method="POST">
-	
-	<label>Account Number</label>
-	<input name="account_number" type="number" max="999999999999" min="1"/>
-	
-	<label>Account Type</label>
-	<select name="account_type">
-		<option value="0">Checking</option>
-		<option value="1">Saving</option>
-		<option value="2">Loan</option>
-	</select>
-	
-	<label>Balance</label>
-	<input type="number" min="0.00" name="balance" step="0.01"/>
-	
-	<input type="submit" name="save" value="Create"/>
-</form>
-
-<?php
-if(isset($_POST["save"])){
-	//TODO add proper validation/checks
-	$account_number = $_POST["account_number"];
-	$account_type = $_POST["account_type"];
-	$balance = $_POST["balance"];
-	$user = get_user_id();
-	$db = getDB();
-	$stmt = $db->prepare("INSERT INTO Accounts (account_number, account_type, balance, user_id) VALUES(:account_number, :account_type, :balance, :user)");
-	$r = $stmt->execute([
-		":account_number"=>$account_number,
-		":account_type"=>$account_type,
-		":balance"=>$balance,
-		":user"=>$user
-	]);
-	if($r){
-		flash("Created successfully with id: " . $db->lastInsertId());
-	}
-	else{
-		$e = $stmt->errorInfo();
-		flash("Error creating: " . var_export($e, true));
-	}
+function has_role($role) {
+    if (is_logged_in() && isset($_SESSION["user"]["roles"])) {
+        foreach ($_SESSION["user"]["roles"] as $r) {
+            if ($r["name"] == $role) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
+
+function get_username() {
+    if (is_logged_in() && isset($_SESSION["user"]["username"])) {
+        return $_SESSION["user"]["username"];
+    }
+    return "";
+}
+
+function get_email() {
+    if (is_logged_in() && isset($_SESSION["user"]["email"])) {
+        return $_SESSION["user"]["email"];
+    }
+    return "";
+}
+
+function get_user_id() {
+    if (is_logged_in() && isset($_SESSION["user"]["id"])) {
+        return $_SESSION["user"]["id"];
+    }
+    return -1;
+}
+
+function safer_echo($var) {
+    if (!isset($var)) {
+        echo "";
+        return;
+    }
+    echo htmlspecialchars($var, ENT_QUOTES, "UTF-8");
+}
+
+//for flash feature
+function flash($msg) {
+    if (isset($_SESSION['flash'])) {
+        array_push($_SESSION['flash'], $msg);
+    }
+    else {
+        $_SESSION['flash'] = array();
+        array_push($_SESSION['flash'], $msg);
+    }
+
+}
+
+function getMessages() {
+    if (isset($_SESSION['flash'])) {
+        $flashes = $_SESSION['flash'];
+        $_SESSION['flash'] = array();
+        return $flashes;
+    }
+    return array();
+}
+
+//end flash
+
+function getType($n) {
+    switch ($n) {
+        case 0:
+            echo "Checking";
+            break;
+        case 1:
+            echo "Saving";
+            break;
+        case 2:
+            echo "Loan";
+            break;
+        default:
+            echo "Unsupported state: " . safer_echo($n);
+            break;
+    }
+}
+
 ?>
-<?php require(__DIR__ . "/partials/flash.php");

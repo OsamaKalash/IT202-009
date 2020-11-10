@@ -29,7 +29,7 @@ if (isset($id)) {
 <?php if (isset($result) && !empty($result)): ?>
     <div class="card">
         <div class="card-title">
-            <p>Account Info:</p>
+            <p><b>Account Info:</b></p>
         </div>
         <div class="card-body">
             <div>
