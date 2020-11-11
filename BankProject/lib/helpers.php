@@ -81,6 +81,9 @@ function getAccType($n) {
         case 2:
             echo "Loan";
             break;
+		case 3:
+            echo "World";
+            break;
         default:
             echo "Unsupported type: " . safer_echo($n);
             break;
