@@ -88,8 +88,8 @@ function getAccType($n) {
 }
 
 function get_dropdown_items(){
-	require("config.php");
-	$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+	//require("config.php");
+	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
 	$db = getDB();
 	$query = "SELECT DISTINCT account_number from Accounts";
 	$stmt = $db->prepare($query);
