@@ -87,4 +87,13 @@ function getAccType($n) {
     }
 }
 
+function get_dropdown_items(){
+	require("config.php");
+	$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+	$db = new PDO($conn_string, $username, $password);
+	$query = "SELECT DISTINCT account_number from Accounts";
+	$stmt = $db->prepare($query);
+	$r = $stmt->execute();
+	return $stmt->fetchAll();
+}
 ?>
