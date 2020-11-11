@@ -58,17 +58,16 @@ if (isset($_POST["save"])) {
     $amount = $_POST["amount"];
     $action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
-	$expected_total = $_POST["expected_total"];
+	
     $user = get_user_id();
     $db = getDB();
-    $stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total, user_id) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total, :user)");
+    $stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, user_id) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :user)");
     $r = $stmt->execute([
         ":act_src_id" => $act_src_id,
         ":act_dest_id" => $act_dest_id,
         ":amount" => $amount,
         ":action_type" => $action_type,
 		":memo" => $memo,
-		":expected_total" => $expected_total,
         ":user" => $user
     ]);
     if ($r) {
