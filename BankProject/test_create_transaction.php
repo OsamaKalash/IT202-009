@@ -88,7 +88,7 @@ if (isset($_POST["save"])) {
 
 
 <?php
-if(isset(isset($_POST["save"]) && $_POST['action_type']) && isset($_POST['act_dest_id']) && isset($_POST['amount'])){
+if(isset($_POST["save"]) && isset($_POST['action_type']) && isset($_POST['act_dest_id']) && isset($_POST['amount'])){
 	$act_src_id = $_POST["act_src_id"];
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
