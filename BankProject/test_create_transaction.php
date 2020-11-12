@@ -28,8 +28,7 @@ $items = get_dropdown_items();
 			<option value="<?php echo $index;?>">
 				<?php echo $row['account_number'];?>
 			</option>
-		<?php endforeach;?>
-		return 
+		<?php endforeach;?> 
 	</select>
 	
 	
