@@ -54,7 +54,7 @@ $items = get_dropdown_items();
 	
 
 <?php
-/*
+
 if (isset($_POST["save"])) {
     //TODO add proper validation/checks
     $act_src_id = $_POST["act_src_id"];
@@ -82,7 +82,7 @@ if (isset($_POST["save"])) {
         flash("Error creating: " . var_export($e, true));
     }
 }
-*/
+
 ?>
 
 
