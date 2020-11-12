@@ -54,7 +54,7 @@ $items = get_dropdown_items();
 	
 
 <?php
-
+/*
 if (isset($_POST["save"])) {
     //TODO add proper validation/checks
     $act_src_id = $_POST["act_src_id"];
@@ -63,7 +63,7 @@ if (isset($_POST["save"])) {
     $action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
     $user = get_user_id();
-	/*
+	
     $db = getDB();
     $stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :user)");
     $r = $stmt->execute([
@@ -74,7 +74,7 @@ if (isset($_POST["save"])) {
 		":memo" => $memo,
         ":user" => $user
     ]);
-	*/
+	
     if ($r) {
         flash("Created successfully with id: " . $db->lastInsertId());
     }
@@ -83,7 +83,7 @@ if (isset($_POST["save"])) {
         flash("Error creating: " . var_export($e, true));
     }
 }
-
+*/
 ?>
 
 
@@ -107,6 +107,22 @@ if(isset(isset($_POST["save"]) && $_POST['action_type']) && isset($_POST['act_de
 			//TODO figure it out
 			break;
 	}
+	$r = $stmt->execute([
+        ":act_src_id" => $act_src_id,
+        ":act_dest_id" => $act_dest_id,
+        ":amount" => $amount,
+        ":action_type" => $action_type,
+		":memo" => $memo,
+        ":user" => $user
+    ]);
+	
+    if ($r) {
+        flash("Created successfully with id: " . $db->lastInsertId());
+    }
+    else {
+        $e = $stmt->errorInfo();
+        flash("Error creating: " . var_export($e, true));
+    }
 }
 ?>
 
