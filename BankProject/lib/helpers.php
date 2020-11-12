@@ -101,9 +101,9 @@ function get_dropdown_items(){
 }
 
 function do_bank_action($account1, $account2, $amountChange, $type){
-	require("config.php");
-	$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
-	$db = new PDO($conn_string, $username, $password);
+	//require("config.php");
+	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+	$db = getDB();
 	$a1total = 0;//TODO get total of account 1
 	$a2total = 0;//TODO get total of account 2
 	$query = "INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) 
