@@ -21,7 +21,7 @@ $items = get_dropdown_items();
 		<option value="2">Transfer</option>
 	</select>	
 	
-	<?php if($_GET['action_type'] == '0' || $_GET['action_type'] == '2') : ?>
+	
 	<label>Source Account</label>
 	<select name="act_src_id">
 		<?php foreach($items as $index=>$row):?>
@@ -31,7 +31,7 @@ $items = get_dropdown_items();
 		<?php endforeach;?>
 	</select>
 	
-	<?php if($_GET['action_type'] == '1' || $_GET['action_type'] == '2') : ?>
+	
 	<label>Destination Account</label>
 	<select name="act_dest_id">
 		<?php foreach($items as $index=>$row):?>
@@ -40,7 +40,7 @@ $items = get_dropdown_items();
 			</option>
 		<?php endforeach;?>
 	</select>
-	<?php endif; ?>
+	
 	
 	<label>Amount</label>
 		<input type="number" min="0.00" name="amount" step="0.01"/>
@@ -63,7 +63,7 @@ if (isset($_POST["save"])) {
     $action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
     $user = get_user_id();
-
+	/*
     $db = getDB();
     $stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :user)");
     $r = $stmt->execute([
@@ -74,6 +74,7 @@ if (isset($_POST["save"])) {
 		":memo" => $memo,
         ":user" => $user
     ]);
+	*/
     if ($r) {
         flash("Created successfully with id: " . $db->lastInsertId());
     }
@@ -87,9 +88,14 @@ if (isset($_POST["save"])) {
 
 
 <?php
-if(isset($_POST['action_type']) && isset($_POST['act_dest_id']) && isset($_POST['amount'])){
-	$type = $_POST['action_type'];
-	$amount = (int)$_POST['amount'];
+if(isset(isset($_POST["save"]) && $_POST['action_type']) && isset($_POST['act_dest_id']) && isset($_POST['amount'])){
+	$act_src_id = $_POST["act_src_id"];
+    $act_dest_id = $_POST["act_dest_id"];
+    $amount = $_POST["amount"];
+    $action_type = $_POST["action_type"];
+	$memo = $_POST["memo"];
+    $user = get_user_id();
+	
 	switch($action_type){
 		case '0':
 			do_bank_action("000000000000", $_POST['act_dest_id'], ($amount * -1), $action_type);
