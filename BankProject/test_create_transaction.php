@@ -29,6 +29,7 @@ $items = get_dropdown_items();
 				<?php echo $row['account_number'];?>
 			</option>
 		<?php endforeach;?>
+		return 
 	</select>
 	
 	
@@ -53,8 +54,8 @@ $items = get_dropdown_items();
 	</form>
 	
 
+
 <?php
-/*
 if (isset($_POST["save"])) {
     //TODO add proper validation/checks
     $act_src_id = $_POST["act_src_id"];
@@ -62,59 +63,52 @@ if (isset($_POST["save"])) {
     $amount = $_POST["amount"];
     $action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
-    $user = get_user_id();
-	
+    //$user = get_user_id();
     $db = getDB();
-    $stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :user)");
-    $r = $stmt->execute([
-        ":act_src_id" => $act_src_id,
-        ":act_dest_id" => $act_dest_id,
-        ":amount" => $amount,
-        ":action_type" => $action_type,
-		":memo" => $memo,
-        ":user" => $user
-    ]);
-	
-    if ($r) {
-        flash("Created successfully with id: " . $db->lastInsertId());
-    }
-    else {
-        $e = $stmt->errorInfo();
-        flash("Error creating: " . var_export($e, true));
-    }
-}
-*/
-?>
-
-
-<?php
-if(isset($_POST["save"]) && isset($_POST['action_type']) && isset($_POST['act_dest_id']) && isset($_POST['amount'])){
-	$act_src_id = $_POST["act_src_id"];
-    $act_dest_id = $_POST["act_dest_id"];
-    $amount = $_POST["amount"];
-    $action_type = $_POST["action_type"];
-	$memo = $_POST["memo"];
-    $user = get_user_id();
-	
 	switch($action_type){
-		case '0':
-			do_bank_action("000000000000", $_POST['act_dest_id'], ($amount * -1), $action_type);
-			break;
-		case '1':
-			do_bank_action($_POST['act_dest_id'], "000000000000", ($amount * -1), $action_type);
-			break;
-		case '2':
-			//TODO figure it out
-			break;
+		case 0:
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$r = $stmt->execute([
+				":act_src_id" => $act_src_id,
+				":act_dest_id" => $act_dest_id,
+				":amount" => ($amount * -1),
+				":action_type" => $action_type,
+				":memo" => $memo,
+			   
+			]);
+	
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$r = $stmt->execute([
+				":act_src_id" => $act_dest_id,
+				":act_dest_id" => $act_src_id,
+				":amount" => $amount,
+				":action_type" => $action_type,
+				":memo" => $memo,
+			   
+			   
+		case 1:
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$r = $stmt->execute([
+				":act_src_id" => $act_src_id,
+				":act_dest_id" => $act_dest_id,
+				":amount" => ($amount),
+				":action_type" => $action_type,
+				":memo" => $memo,
+			   
+			]);
+	
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$r = $stmt->execute([
+				":act_src_id" => $act_dest_id,
+				":act_dest_id" => $act_src_id,
+				":amount" => ($amount * -1),
+				":action_type" => $action_type,
+				":memo" => $memo,
+			   
 	}
-	$r = $stmt->execute([
-        ":act_src_id" => $act_src_id,
-        ":act_dest_id" => $act_dest_id,
-        ":amount" => $amount,
-        ":action_type" => $action_type,
-		":memo" => $memo,
-        ":user" => $user
     ]);
+	
+	
 	
     if ($r) {
         flash("Created successfully with id: " . $db->lastInsertId());
@@ -124,6 +118,11 @@ if(isset($_POST["save"]) && isset($_POST['action_type']) && isset($_POST['act_de
         flash("Error creating: " . var_export($e, true));
     }
 }
+
 ?>
+
+
+
+
 
 <?php require(__DIR__ . "/partials/flash.php");

@@ -100,31 +100,5 @@ function get_dropdown_items(){
 	return $stmt->fetchAll();
 }
 
-function do_bank_action($account1, $account2, $amountChange, $type){
-	//require("config.php");
-	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
-	$db = getDB();
-	$a1total = 0;//TODO get total of account 1
-	$a2total = 0;//TODO get total of account 2
-	$query = "INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) 
-	VALUES(:p1a1, :p1a2, :p1change, :type, :a1total), 
-			(:p2a1, :p2a2, :p2change, :type, :a2total)";
-	
-	$stmt = $db->prepare($query);
-	$stmt->bindValue(":p1a1", $account1);
-	$stmt->bindValue(":p1a2", $account2);
-	$stmt->bindValue(":p1change", $amountChange);
-	$stmt->bindValue(":type", $type);
-	$stmt->bindValue(":a1total", $a1total);
-	//flip data for other half of transaction
-	$stmt->bindValue(":p2a1", $account2);
-	$stmt->bindValue(":p2a2", $account1);
-	$stmt->bindValue(":p2change", ($amountChange*-1));
-	$stmt->bindValue(":type", $type);
-	$stmt->bindValue(":a2total", $a2total);
-	$result = $stmt->execute();
-	echo var_export($result, true);
-	echo var_export($stmt->errorInfo(), true);
-	return $result;
-}
+
 ?>
