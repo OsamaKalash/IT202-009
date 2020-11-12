@@ -54,6 +54,7 @@ $items = get_dropdown_items();
 	
 
 <?php
+/*
 if (isset($_POST["save"])) {
     //TODO add proper validation/checks
     $act_src_id = $_POST["act_src_id"];
@@ -62,7 +63,7 @@ if (isset($_POST["save"])) {
     $action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
     $user = get_user_id();
-	/*
+
     $db = getDB();
     $stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :user)");
     $r = $stmt->execute([
@@ -81,8 +82,9 @@ if (isset($_POST["save"])) {
         flash("Error creating: " . var_export($e, true));
     }
 }
-?>
 */
+?>
+
 
 <?php
 if(isset($_POST['action_type']) && isset($_POST['act_dest_id']) && isset($_POST['amount'])){
