@@ -22,6 +22,10 @@ if (isset($_POST["save"])) {
     $action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
     //$user = get_user_id();
+	$bal1 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_src_id");
+	$bal1=$bal1->fetch(PDO::FETCH_NUM);
+	$bal2 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_dest_id");
+	$bal2=$bal2->fetch(PDO::FETCH_NUM);
     $db = getDB();
 	if(isset($id)){
 	switch($action_type){
@@ -108,7 +112,7 @@ if(isset($id)){
 	<label>Memo</label>
 		<input type="text" name="memo" value="<?php echo $result["memo"];?>"/>
 		
-    <input type="submit" name="save" value="Create"/>
+    <input type="submit" name="save" value="Update"/>
     
 	</form>
 
