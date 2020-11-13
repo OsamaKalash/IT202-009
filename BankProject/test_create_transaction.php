@@ -26,7 +26,7 @@ $items = get_dropdown_items();
 	<select name="act_src_id">
 		<?php foreach($items as $index=>$row):?>
 			<option value="<?php echo $index;?>">
-				<?php echo $row['account_number']+1;?>
+				<?php echo $row['account_number'];?>
 			</option>
 		<?php endforeach;?> 
 	</select>
@@ -36,7 +36,7 @@ $items = get_dropdown_items();
 	<select name="act_dest_id">
 		<?php foreach($items as $index=>$row):?>
 			<option value="<?php echo $index;?>">
-				<?php echo $row['account_number']+1;?>
+				<?php echo $row['account_number'];?>
 			</option>
 		<?php endforeach;?>
 	</select>
@@ -57,7 +57,7 @@ $items = get_dropdown_items();
 <?php
 if (isset($_POST["save"])) {
     //TODO add proper validation/checks
-    $act_src_id = $_POST["act_src_id"];
+    $act_src_id = $_POST["act_src_id"]+1;
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
     $action_type = $_POST["action_type"];
