@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
 $result = [];
 if (isset($id)) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT id, act_src_id, act_dest_id, amount, action_type, memo,expected_total from Transactions");
+    $stmt = $db->prepare("SELECT id, act_src_id, act_dest_id, amount, action_type, memo,expected_total from Transactions where id = :id");
     $r = $stmt->execute([":id" => $id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$result) {
