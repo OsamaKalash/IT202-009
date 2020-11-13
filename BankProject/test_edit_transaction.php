@@ -20,17 +20,11 @@ $items = get_dropdown_items();
 <?php
 if (isset($_POST["save"])) {
     //TODO add proper validation/checks
-    $act_src_id = $_POST["act_src_id"];
-    $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
     $action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
     //$user = get_user_id();
     $db = getDB();
-	$bal1 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_src_id");
-	$bal1=$bal1->fetch(PDO::FETCH_NUM);
-	$bal2 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_dest_id");
-	$bal2=$bal2->fetch(PDO::FETCH_NUM);
 	if(isset($id)){
 	switch($action_type){
 		case 0:
@@ -72,18 +66,18 @@ if (isset($_POST["save"])) {
 			]);
 			break;
 	}
-	if($r){
-			flash("Updated successfully with id: " . $id);
-		}
-		else{
-			$e = $stmt->errorInfo();
-			flash("Error updating: " . var_export($e, true));
-		}
-	}
-	else{
+	if ($r) {
+            flash("Updated successfully with id: " . $id);
+        }
+        else {
+            $e = $stmt->errorInfo();
+            flash("Error updating: " . var_export($e, true));
+        }
+	
+}
+else{
 		flash("ID isn't set, we need an ID in order to update");
 	}
-	
 }
 ?>
 
