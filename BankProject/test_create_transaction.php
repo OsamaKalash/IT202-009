@@ -64,44 +64,51 @@ if (isset($_POST["save"])) {
 	$memo = $_POST["memo"];
     //$user = get_user_id();
     $db = getDB();
+	$bal1 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_src_id");
+	$bal1=$bal1->fetch();
+	$bal2 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_dest_id");
+	$bal2=$bal2->fetch();
 	switch($action_type){
 		case 0:
-			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
 			$r = $stmt->execute([
 				":act_src_id" => $act_src_id,
 				":act_dest_id" => $act_dest_id,
 				":amount" => ($amount * -1),
 				":action_type" => $action_type,
-				":memo" => $memo  
+				":memo" => $memo,
+				":expected_total" => $bal1 - $amount
 			]);
 	
-			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
 			$r = $stmt->execute([
 				":act_src_id" => $act_dest_id,
 				":act_dest_id" => $act_src_id,
 				":amount" => $amount,
 				":action_type" => $action_type,
 				":memo" => $memo
+				":expected_total" => $bal1 + $amount
 			]);   
 			break;  
 		case 1:
-			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
 			$r = $stmt->execute([
 				":act_src_id" => $act_src_id,
 				":act_dest_id" => $act_dest_id,
 				":amount" => ($amount),
 				":action_type" => $action_type,
 				":memo" => $memo
+				":expected_total" => $bal2 + $amount
 			   
 			]);
-	
-			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo)");
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
 			$r = $stmt->execute([
 				":act_src_id" => $act_dest_id,
 				":act_dest_id" => $act_src_id,
 				":amount" => ($amount * -1),
 				":action_type" => $action_type,
 				":memo" => $memo
+				":expected_total" => $bal2 - $amount
 			]);
 			break;
 	}
