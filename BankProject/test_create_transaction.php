@@ -25,8 +25,8 @@ $items = get_dropdown_items();
 	<label>Source Account</label>
 	<select name="act_src_id">
 		<?php foreach($items as $index=>$row):?>
-			<option value="<?php echo $index+1;?>">
-				<?php echo $row['account_number'];?>
+			<option value="<?php echo $index;?>">
+				<?php echo $row['account_number']+1;?>
 			</option>
 		<?php endforeach;?> 
 	</select>
@@ -35,8 +35,8 @@ $items = get_dropdown_items();
 	<label>Destination Account</label>
 	<select name="act_dest_id">
 		<?php foreach($items as $index=>$row):?>
-			<option value="<?php echo $index+1;?>">
-				<?php echo $row['account_number'];?>
+			<option value="<?php echo $index;?>">
+				<?php echo $row['account_number']+1;?>
 			</option>
 		<?php endforeach;?>
 	</select>
