@@ -77,7 +77,7 @@ if (isset($_POST["save"])) {
 				":amount" => ($amount * -1),
 				":action_type" => $action_type,
 				":memo" => $memo,
-				":expected_total" => $bal1 - $amount
+				":expected_total" => ($bal1 - $amount)
 			]);
 	
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
@@ -87,7 +87,7 @@ if (isset($_POST["save"])) {
 				":amount" => $amount,
 				":action_type" => $action_type,
 				":memo" => $memo
-				":expected_total" => $bal1 + $amount
+				":expected_total" => ($bal1 + $amount)
 			]);   
 			break;  
 		case 1:
@@ -98,7 +98,7 @@ if (isset($_POST["save"])) {
 				":amount" => ($amount),
 				":action_type" => $action_type,
 				":memo" => $memo
-				":expected_total" => $bal2 + $amount
+				":expected_total" => ($bal2 + $amount)
 			   
 			]);
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
@@ -108,7 +108,7 @@ if (isset($_POST["save"])) {
 				":amount" => ($amount * -1),
 				":action_type" => $action_type,
 				":memo" => $memo
-				":expected_total" => $bal2 - $amount
+				":expected_total" => ($bal2 - $amount)
 			]);
 			break;
 	}
