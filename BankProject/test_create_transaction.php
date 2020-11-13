@@ -86,7 +86,7 @@ if (isset($_POST["save"])) {
 				":act_dest_id" => $act_src_id,
 				":amount" => $amount,
 				":action_type" => $action_type,
-				":memo" => $memo
+				":memo" => $memo,
 				":expected_total" => ($bal1 + $amount)
 			]);   
 			break;  
@@ -97,7 +97,7 @@ if (isset($_POST["save"])) {
 				":act_dest_id" => $act_dest_id,
 				":amount" => ($amount),
 				":action_type" => $action_type,
-				":memo" => $memo
+				":memo" => $memo,
 				":expected_total" => ($bal2 + $amount)
 			   
 			]);
@@ -107,7 +107,7 @@ if (isset($_POST["save"])) {
 				":act_dest_id" => $act_src_id,
 				":amount" => ($amount * -1),
 				":action_type" => $action_type,
-				":memo" => $memo
+				":memo" => $memo,
 				":expected_total" => ($bal2 - $amount)
 			]);
 			break;
