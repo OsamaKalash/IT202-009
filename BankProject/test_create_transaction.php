@@ -57,7 +57,7 @@ $items = get_dropdown_items();
 <?php
 if (isset($_POST["save"])) {
     //TODO add proper validation/checks
-    $act_src_id = $_POST["act_src_id"]+1;
+    $act_src_id = $_POST["act_src_id"];
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
     $action_type = $_POST["action_type"];
