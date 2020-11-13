@@ -13,9 +13,7 @@ if(isset($_GET["id"])){
 	$id = $_GET["id"];
 }
 ?>
-<?php
-$items = get_dropdown_items();
-?>
+
 
 <?php
 if (isset($_POST["save"])) {
@@ -30,7 +28,7 @@ if (isset($_POST["save"])) {
 		case 0:
 			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id");
 			$r = $stmt->execute([
-				":id"=>$id,
+				":id" => $id,
 				":amount" => ($amount * -1),
 				":action_type" => $action_type,
 				":memo" => $memo,
@@ -39,7 +37,7 @@ if (isset($_POST["save"])) {
 	
 			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id");
 			$r = $stmt->execute([
-				":id"=>$id,
+				":id" => $id,
 				":amount" => $amount,
 				":action_type" => $action_type,
 				":memo" => $memo,
@@ -49,7 +47,7 @@ if (isset($_POST["save"])) {
 		case 1:
 			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id");
 			$r = $stmt->execute([
-				":id"=>$id,
+				":id" => $id,
 				":amount" => ($amount),
 				":action_type" => $action_type,
 				":memo" => $memo,
@@ -58,7 +56,7 @@ if (isset($_POST["save"])) {
 			]);
 			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id");
 			$r = $stmt->execute([
-				":id"=>$id,
+				":id" => $id,
 				":amount" => ($amount * -1),
 				":action_type" => $action_type,
 				":memo" => $memo,
