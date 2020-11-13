@@ -39,7 +39,7 @@ if (isset($_POST["save"])) {
 				":expected_total" => ($bal1 - $amount)
 			]);
 	
-			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id");
+			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id+1");
 			$r = $stmt->execute([
 				":id" => $id,
 				":amount" => $amount,
@@ -58,7 +58,7 @@ if (isset($_POST["save"])) {
 				":expected_total" => ($bal2 + $amount)
 			   
 			]);
-			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id");
+			$stmt = $db->prepare("UPDATE Transactions set amount=:amount, action_type=:action_type, memo=:memo,expected_total=:expected_total where id=:id+1");
 			$r = $stmt->execute([
 				":id" => $id,
 				":amount" => ($amount * -1),
