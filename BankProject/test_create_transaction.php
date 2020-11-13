@@ -65,11 +65,9 @@ if (isset($_POST["save"])) {
     //$user = get_user_id();
     $db = getDB();
 	$bal1 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_src_id");
-	$bal1=$bal1->fetch();
-	echo $bal1;
+	$bal1=$bal1->fetch(PDO::FETCH_NUM);
 	$bal2 = $db->prepare("SELECT balance FROM Accounts WHERE id = :act_dest_id");
-	$bal2=$bal2->fetch();
-	echo $bal2;
+	$bal2=$bal2->fetch(PDO::FETCH_NUM);
 	switch($action_type){
 		case 0:
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
