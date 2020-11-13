@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
 $result = [];
 if (isset($id)) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT act_src_id, act_dest_id, amount, action_type, memo,expected_total from Transactions");
+    $stmt = $db->prepare("SELECT Trans.id, act_src_id, act_dest_id, amount, action_type, memo,expected_total from Transactions as Trans where Trans.id = :id");
     $r = $stmt->execute([":id" => $id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$result) {
@@ -34,7 +34,7 @@ if (isset($id)) {
         <div class="card-body">
             <div>
 				<div>Source Account: <?php safer_echo($result["act_src_id"]); ?></div>
-                <div>Destination Account: <?php getAccType($result["act_dest_id"]); ?></div>
+                <div>Destination Account: <?php safer_echo($result["act_dest_id"]); ?></div>
                 <div>Transaction Type: <?php safer_echo($result["action_type"]); ?></div>
                 <div>Amount: <?php safer_echo($result["amount"]); ?></div>
                 <div>Expected Total:<?php safer_echo($result["expected_total"]); ?></div>
