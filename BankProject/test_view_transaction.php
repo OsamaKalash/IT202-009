@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
 $result = [];
 if (isset($id)) {
     $db = getDB();
-    $stmt = $db->prepare("SELECT act_src_id, act_dest_id, amount, action_type, memo,expected_total from Transactions");
+    $stmt = $db->prepare("SELECT id, act_src_id, act_dest_id, amount, action_type, memo,expected_total from Transactions");
     $r = $stmt->execute([":id" => $id]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$result) {
@@ -29,7 +29,7 @@ if (isset($id)) {
 <?php if (isset($result) && !empty($result)): ?>
     <div class="card">
         <div class="card-title">
-            <p><b>Account Info:</b></p>
+            <p><b>Transaction Info:</b></p>
         </div>
         <div class="card-body">
             <div>
