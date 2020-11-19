@@ -33,11 +33,11 @@ if(isset($_POST["save"])){
 		":user"=>$user
 	]);
 	if($r){
-		flash("Created successfully with id: " . $db->lastInsertId());
+		flash("Yay! Your account was created successfully!");
 	}
 	else{
 		$e = $stmt->errorInfo();
-		flash("Error creating: " . var_export($e, true));
+		flash("Uh oh! There was an error while creating your account!");
 	}
 }
 ?>
