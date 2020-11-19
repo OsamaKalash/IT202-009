@@ -20,7 +20,7 @@ if(isset($_POST["save"])){
 	
 	$unique=false;
 	
-	while(!$unique)
+	while(!unique)
 	{
 		$account_number = rand(100000000000,999999999999);
 		$db = getDB();
