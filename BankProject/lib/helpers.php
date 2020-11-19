@@ -69,4 +69,36 @@ function getMessages() {
 }
 
 //end flash
+
+function getAccType($n) {
+    switch ($n) {
+        case 0:
+            echo "Checking";
+            break;
+        case 1:
+            echo "Saving";
+            break;
+        case 2:
+            echo "Loan";
+            break;
+		case 3:
+            echo "World";
+            break;
+        default:
+            echo "Unsupported type: " . safer_echo($n);
+            break;
+    }
+}
+
+function get_dropdown_items(){
+	//require("config.php");
+	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+	$db = getDB();
+	$query = "SELECT DISTINCT account_number from Accounts";
+	$stmt = $db->prepare($query);
+	$r = $stmt->execute();
+	return $stmt->fetchAll();
+}
+
+
 ?>
