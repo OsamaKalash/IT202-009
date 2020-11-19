@@ -23,6 +23,7 @@ if(isset($_POST["save"])){
 	while(!$unique)
 	{
 		$account_number = rand(100000000000,999999999999);
+		$db = getDB();
 		$stmt = $db->prepare("INSERT INTO Accounts (account_number) VALUES(:account_number)");
 		$r = $stmt->execute([
 			":account_number"=>$account_number]);
@@ -36,7 +37,6 @@ if(isset($_POST["save"])){
 	$account_type = $_POST["account_type"];
 	$balance = 0.0;
 	$user = get_user_id();
-	$db = getDB();
 	$stmt = $db->prepare("INSERT INTO Accounts (account_type, balance, user_id) VALUES(:account_type, :balance, :user)");
 	$r = $stmt->execute([
 		":account_type"=>$account_type,
