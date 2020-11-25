@@ -23,6 +23,7 @@ if(isset($_POST["save"])){
 
 	//TODO add proper validation/checks
 	//$account_number = $_POST["account_number"];
+	$account_number = 0;
 	$account_type = $_POST["account_type"];
 	$balance = $_POST["balance"];
 	$user = get_user_id();
