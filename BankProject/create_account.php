@@ -87,7 +87,7 @@ if(isset($_POST["save"])){
 					":amount" => ($balance * -1),
 					":action_type" => 0,
 					":memo" => "",
-					":expected_total" => ($balance)
+					":expected_total" => $balance
 				]);
 		
 				$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
@@ -97,7 +97,7 @@ if(isset($_POST["save"])){
 					":amount" => $balance,
 					":action_type" => 0,
 					":memo" => "",
-					":expected_total" => ($balance)
+					":expected_total" => $balance
 				]);   
 		
 				break;
