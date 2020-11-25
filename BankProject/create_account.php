@@ -31,15 +31,17 @@ if(isset($_POST["save"])){
 	$count=0;
 	$valid=false;
 	
-	if($account_type="0"){
-		if((float)$balance >= 5.0){
-			$valid =true;
-		}
-		else{
-			flash("You need to have at least 5 dollars in your account!");
-			
-		}
+	switch($account_type){
+		case 0:
 		
+			if((float)$balance >= 5.0){
+				$valid =true;
+			}
+			else{
+				flash("You need to have at least 5 dollars in your account!");
+				
+			}
+			break;
 	}
 	
 	
@@ -71,32 +73,34 @@ if(isset($_POST["save"])){
 		":user"=>$user
 	]);
 	
-	if($account_type = "0"){
+	switch($account_type){
 		
-		$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+		case 0:
 		
-		
-		$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
-			$r = $stmt->execute([
-				":act_src_id" => 1,
-				":act_dest_id" => $newAccID,
-				":amount" => ($balance * -1),
-				":action_type" => 0,
-				":memo" => "",
-				":expected_total" => ($balance)
-			]);
-	
+			$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+			
+			
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
-			$r = $stmt->execute([
-				":act_src_id" => $newAccID,
-				":act_dest_id" => 1,
-				":amount" => $balance,
-				":action_type" => 0,
-				":memo" => "",
-				":expected_total" => ($balance)
-			]);   
-	
-	
+				$r = $stmt->execute([
+					":act_src_id" => 1,
+					":act_dest_id" => $newAccID,
+					":amount" => ($balance * -1),
+					":action_type" => 0,
+					":memo" => "",
+					":expected_total" => ($balance)
+				]);
+		
+				$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
+				$r = $stmt->execute([
+					":act_src_id" => $newAccID,
+					":act_dest_id" => 1,
+					":amount" => $balance,
+					":action_type" => 0,
+					":memo" => "",
+					":expected_total" => ($balance)
+				]);   
+		
+				break;
 	}
 	
 	if($r){
