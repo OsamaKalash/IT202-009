@@ -31,7 +31,7 @@ if(isset($_POST["save"])){
 	$unique=false;
 	$count=0;
 	$valid=false;
-	
+	$world_id = 1;
 	switch($account_type){
 		case 0:
 			if($balance >= 5){
@@ -82,7 +82,7 @@ if(isset($_POST["save"])){
 			
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :expected_total)");
 				$r = $stmt->execute([
-					":act_src_id" => "1",
+					":act_src_id" => $world_id,
 					":act_dest_id" => $newAccID,
 					":amount" => ($balance * -1),
 					":action_type" => 0,
@@ -92,7 +92,7 @@ if(isset($_POST["save"])){
 				$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :expected_total)");
 				$r = $stmt->execute([
 					":act_src_id" => $newAccID,
-					":act_dest_id" => "1",
+					":act_dest_id" => $world_id,
 					":amount" => $balance,
 					":action_type" => 0,
 					":expected_total" => $balance
