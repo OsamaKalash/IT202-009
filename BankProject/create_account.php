@@ -40,7 +40,7 @@ if(isset($_POST["save"])){
 			flash("You need to have at least 5 dollars in your account!");
 			
 		}
-		break;
+		
 	}
 	
 	
