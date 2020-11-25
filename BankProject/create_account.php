@@ -27,7 +27,7 @@ if(isset($_POST["save"])){
 	$balance = $_POST["balance"];
 	$user = get_user_id();
 	$db = getDB();
-	$unique=true;
+	$unique=false;
 	$count=0;
 	$valid=true;
 	
