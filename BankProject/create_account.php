@@ -80,21 +80,23 @@ if(isset($_POST["save"])){
 			$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
 			$newAccID = $newAccID->fetch(PDO::FETCH_NUM);
 			
-			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :expected_total)");
+			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
 				$r = $stmt->execute([
 					":act_src_id" => $world_id,
 					":act_dest_id" => $newAccID,
 					":amount" => ($balance * -1),
 					":action_type" => 0,
+					":memo" => null,
 					":expected_total" => $balance
 				]);
 		
-				$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :expected_total)");
+				$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
 				$r = $stmt->execute([
 					":act_src_id" => $newAccID,
 					":act_dest_id" => $world_id,
 					":amount" => $balance,
 					":action_type" => 0,
+					":memo" => null,
 					":expected_total" => $balance
 				]);   
 		
