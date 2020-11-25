@@ -32,15 +32,15 @@ if(isset($_POST["save"])){
 	$count=0;
 	$valid=false;
 	
-	if($account_type = 0){
-		
-		if($balance >= 5.00){
-			$valid =true;
-		}
-		else{
-			flash("You need to have at least 5 dollars in your account!");
-			
-		}
+	switch($account_type){
+		case 0:
+			if($balance >= 5.00){
+				$valid =true;
+			}
+			else{
+				flash("You need to have at least 5 dollars in your account!");
+				
+			}
 		
 	}
 	
@@ -78,7 +78,7 @@ if(isset($_POST["save"])){
 		case 0:
 		
 			$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
-			
+			$newAccID = $newAccID->fetch(PDO::FETCH_NUM);
 			
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :expected_total)");
 				$r = $stmt->execute([
