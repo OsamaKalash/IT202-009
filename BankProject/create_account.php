@@ -43,7 +43,6 @@ if(isset($_POST["save"])){
 		
 	}
 	
-	
 	while(!$unique && $count<10 && $valid){
 		$account_number = rand(100000000000,999999999999);
 		$stmt = $db->prepare("SELECT account_number from Accounts WHERE account_number = :newNum");
@@ -62,6 +61,7 @@ if(isset($_POST["save"])){
 		$valid = false;
 		flash("Uh oh, there was an error while creating your account number");
 	}
+	
 	
 	
 	$stmt = $db->prepare("INSERT INTO Accounts (account_number, account_type, balance, user_id) VALUES(:account_number, :account_type, :balance, :user)");
