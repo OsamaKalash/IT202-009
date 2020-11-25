@@ -105,8 +105,10 @@ if(isset($_POST["save"])){
 		flash("Yay! Your account was created successfully!");
 	}
 	else{
+		
 		$e = $stmt->errorInfo();
-		flash("Uh oh! There was an error while creating your account!");
+		flash("Error creating: " . var_export($e, true));
+		//flash("Uh oh! There was an error while creating your account!");
 	}
 }
 ?>
