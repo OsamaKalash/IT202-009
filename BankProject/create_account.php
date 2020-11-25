@@ -31,17 +31,16 @@ if(isset($_POST["save"])){
 	$count=0;
 	$valid=false;
 	
-	switch($account_type){
-		case 0:
+	if($account_type = 0){
 		
-			if((float)$balance >= 5.0){
-				$valid =true;
-			}
-			else{
-				flash("You need to have at least 5 dollars in your account!");
-				
-			}
-			break;
+		if($balance >= 5.00){
+			$valid =true;
+		}
+		else{
+			flash("You need to have at least 5 dollars in your account!");
+			
+		}
+		break;
 	}
 	
 	
