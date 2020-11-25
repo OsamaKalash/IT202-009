@@ -29,10 +29,10 @@ if(isset($_POST["save"])){
 	$db = getDB();
 	$unique=false;
 	$count=0;
-	$valid=true;
+	$valid=false;
 	
-	if($account_type=0){
-		if((float)$balance >=5.0){
+	if($account_type="0"){
+		if((float)$balance >= 5.0){
 			$valid =true;
 		}
 		else{
@@ -71,7 +71,7 @@ if(isset($_POST["save"])){
 		":user"=>$user
 	]);
 	
-	if($account_type = 0){
+	if($account_type = "0"){
 		
 		$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
 		
