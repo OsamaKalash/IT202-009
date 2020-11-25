@@ -49,7 +49,7 @@ if(isset($_POST["save"])){
 		$r = $stmt->execute([
 		":newNum" => $account_number
 		]);
-		$r2 = $stmt -> fetch(PDO:FETCH_ASSOC);
+		$r2 = $stmt -> fetch(PDO::FETCH_ASSOC);
 		if(empty($r2)){
 			$unique = true;
 			break;
