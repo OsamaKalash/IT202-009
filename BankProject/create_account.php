@@ -34,7 +34,7 @@ if(isset($_POST["save"])){
 	
 	switch($account_type){
 		case 0:
-			if($balance >= 5.00){
+			if($balance >= 5){
 				$valid =true;
 			}
 			else{
