@@ -13,9 +13,9 @@ $items = get_acc_number();
 	
 	<label>Choose an Account</label>
 	<select name="act_dest_id">
-		<?php foreach($items as $index=>$row):?>
-			<option value="<?php echo $index+1;?>">
-				<?php echo $row['account_number'];?>
+		<?php foreach($items as $row):?>
+			<option value="<?php echo $row["id"]?>">
+				<?php echo $row["account_number"];?>
 			</option>
 		<?php endforeach;?>
 	</select>
@@ -42,11 +42,7 @@ if (isset($_POST["save"])) {
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	$world_id = $r["id"];
 	
-	$db = getDB();
-	$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
-	$stmt->execute();
-	$r = $stmt->fetch(PDO::FETCH_ASSOC);
-	$world_id = $r["id"];
+	
 	
     //TODO add proper validation/checks
     $act_src_id = $world_id;
