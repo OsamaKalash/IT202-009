@@ -2,7 +2,9 @@
 
 
 <?php
-$items = get_dropdown_items();
+
+$user = get_user_id();
+$items = get_acc_number();
 ?>
 
     <h3>Deposit</h3>

@@ -45,7 +45,6 @@ if (isset($_POST["search"]) && !empty($query)) {
                         <div><?php safer_echo($r["balance"]); ?></div>
                     </div>
                     <div>
-                        <a type="button" href="edit_account.php?id=<?php safer_echo($r['id']); ?>">Edit</a>
                         <a type="button" href="view_account.php?id=<?php safer_echo($r['id']); ?>">View</a>
                     </div>
                 </div>

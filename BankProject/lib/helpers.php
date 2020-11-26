@@ -100,5 +100,16 @@ function get_dropdown_items(){
 	return $stmt->fetchAll();
 }
 
+function get_acc_number(){
+	//require("config.php");
+	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+	$db = getDB();
+	$query = "SELECT DISTINCT account_number from Accounts WHERE user_id = :user";
+	$stmt = $db->prepare($query);
+	$r = $stmt->execute([
+	":user" => $user
+	]);
+	return $stmt->fetchAll();
+}
 
 ?>
