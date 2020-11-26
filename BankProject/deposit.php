@@ -64,7 +64,7 @@ if (isset($_POST["save"])) {
 		":my_id" => $act_dest_id
 		]);
 		$r2 = $stmt2->fetch(PDO::FETCH_ASSOC);
-		$myBal = $r2["balance"];
+		$myBal = (float)$r2["balance"];
 	
 	
 	
