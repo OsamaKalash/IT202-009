@@ -74,17 +74,17 @@ if(isset($_POST["save"])){
 	]);
 	
 	
-	$world_id = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
-	$world_id = $world_id->fetch(PDO::FETCH_NUM);
+	$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
+	$world_id = $stmt->fetch(PDO::FETCH_NUM);
 	switch($account_type){
 		
 		case 0:
 		
-			$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
-			$r = $newAccID->execute([
+			$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+			$r = $stmt->execute([
 			":account_number" => $account_number
 			]);
-			$newAccID = $newAccID->fetch(PDO::FETCH_NUM);
+			$newAccID = $r->fetch(PDO::FETCH_NUM);
 			
 			
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
