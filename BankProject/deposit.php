@@ -5,8 +5,8 @@
 
 	$user = get_user_id();
 	$db = getDB();
-	$query = "SELECT DISTINCT account_number from Accounts WHERE user_id = :user";
-	$stmt = $db->prepare($query);
+	
+	$stmt = $db->prepare("SELECT id, account_number from Accounts WHERE user_id = :user");
 	$r = $stmt->execute([
 	":user" => $user
 	]);
@@ -20,7 +20,7 @@
 	<label>Choose an Account</label>
 	<select name="act_dest_id">
 		<?php foreach($items as $index=>$row):?>
-			<option value="<?php echo $row["id"]?>">
+			<option value="<?php echo $index["id"]?>">
 				<?php echo $row["account_number"]?>
 			</option>
 		<?php endforeach;?>
