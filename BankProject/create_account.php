@@ -77,7 +77,8 @@ if(isset($_POST["save"])){
 	$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
 	$stmt->execute();
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
-	$world_id = $r[id];
+	$world_id = $r["id"];
+	
 	switch($account_type){
 		
 		case 0:
@@ -87,7 +88,7 @@ if(isset($_POST["save"])){
 			":account_number" => $account_number
 			]);
 			$r2 = $stmt->fetch(PDO::FETCH_ASSOC);
-			$newAccID = $r2[id];
+			$newAccID = $r2["id"];
 			
 			
 			$stmt = $db->prepare("SELECT balance FROM Accounts WHERE id = :world_id");
@@ -95,7 +96,7 @@ if(isset($_POST["save"])){
 			":world_id" => $world_id
 			]);
 			$r2 = $stmt->fetch(PDO::FETCH_ASSOC);
-			$worldBal = $r2[balance];
+			$worldBal = $r2["balance"];
 			
 			
 			
@@ -106,7 +107,7 @@ if(isset($_POST["save"])){
 					":amount" => ($balance * -1),
 					":action_type" => 0,
 					":memo" => "",
-					":expected_total" => ($worldBal - ($balance * -1))
+					":expected_total" => ($worldBal - $balance)
 				]);
 		
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
