@@ -75,12 +75,16 @@ if(isset($_POST["save"])){
 	
 	
 	$world_id = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
+	$r = $stmt->execute([
+	]);
 	$world_id = $world_id->fetch(PDO::FETCH_NUM);
 	switch($account_type){
 		
 		case 0:
 		
 			$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+			$r = $stmt->execute([
+			]);
 			$newAccID = $newAccID->fetch(PDO::FETCH_NUM);
 			
 			
