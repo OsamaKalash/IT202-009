@@ -32,7 +32,7 @@ if (isset($id)) {
                 <div>Balance: <?php safer_echo($result["balance"]); ?></div>
                 <div>Date Opened: <?php safer_echo($result["opened_date"]); ?></div>
                 <div>Last Updated: <?php safer_echo($result["last_updated"]); ?></div>
-                <div>User ID: <?php safer_echo($result["user_id"]); ?></div>
+               
             </div>
         </div>
     </div>

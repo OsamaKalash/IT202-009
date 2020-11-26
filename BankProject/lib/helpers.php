@@ -90,6 +90,25 @@ function getAccType($n) {
     }
 }
 
+function getTransType($n) {
+    switch ($n) {
+        case 0:
+            echo "Deposit";
+            break;
+        case 1:
+            echo "Withdraw";
+            break;
+        case 2:
+            echo "Transfer";
+            break;
+        default:
+            echo "Unsupported type: " . safer_echo($n);
+            break;
+    }
+}
+
+
+
 function get_dropdown_items(){
 	//require("config.php");
 	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
