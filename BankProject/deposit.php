@@ -19,8 +19,8 @@
 	
 	<label>Choose an Account</label>
 	<select name="act_dest_id">
-		<?php foreach($items as $index=>$row):?>
-			<option value="<?php echo $index["id"]?>">
+		<?php foreach($items as $row):?>
+			<option value="<?php echo $row["id"]?>">
 				<?php echo $row["account_number"]?>
 			</option>
 		<?php endforeach;?>
@@ -67,7 +67,7 @@ if (isset($_POST["save"])) {
 		":my_id" => $act_dest_id
 		]);
 		$r = $stmt->fetch(PDO::FETCH_ASSOC);
-		$myBal = $r["balance"];
+		$myBal = (float)$r["balance"];
 	
 	
 	
@@ -109,7 +109,7 @@ if (isset($_POST["save"])) {
     }
     else {
         //$e = $stmt->errorInfo();
-        flash("Uh oh, there was an error while completing your depoit!");
+        flash("Uh oh, there was an error while completing your deposit!");
     }
 }
 
