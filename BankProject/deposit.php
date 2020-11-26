@@ -45,7 +45,7 @@ if (isset($_POST["save"])) {
 	
 	
     //TODO add proper validation/checks
-	$myBal = "0.00"
+	$myBal = "0.00";
     $act_src_id = $world_id;
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
