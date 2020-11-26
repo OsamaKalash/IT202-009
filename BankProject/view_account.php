@@ -59,26 +59,22 @@ if (isset($id)) {
         </div>
 		
 		<div class="results">
-    <?php if (count($transR) > 0): ?>
+		<?php if (count($transR) > 0): ?>
         <div class="list-group">
             <?php foreach ($transR as $r): ?>
-                <div class="list-group-item">
-					<div>
-                        <div>Transaction Type:</div>
-                        <div><?php getTransType($r["action_type"]); ?></div>
-                    </div>	
-					<div>
-                        <div>Amount:</div>
-                        <div><?php safer_echo($r["amount"]); ?></div>
-                    </div>
-					<div>
-						<div>Memo:</div>
-						<div><?php safer_echo($r["memo"]); ?></div>
-					</div>
-					<div>
-						<div>Date Created:</div>
-						<div><?php safer_echo($r["created"]); ?></div>
-					</div>
+                <div class="card-body">
+					
+					<div>Transaction Type: <?php getTransType($r["action_type"]); ?></div>
+                    
+					
+					<div>Amount: <?php safer_echo($r["amount"]); ?></div>
+                    
+					
+					<div>Memo: <?php safer_echo($r["memo"]); ?></div>
+					
+					
+					<div>Date Created: <?php safer_echo($r["created"]); ?></div>
+					
                 </div>
             <?php endforeach; ?>
         </div>
