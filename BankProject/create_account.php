@@ -81,10 +81,11 @@ if(isset($_POST["save"])){
 		case 0:
 		
 			$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
+			$newAccID = $stmt->fetch(PDO::FETCH_NUM);
 			$r = $stmt->execute([
 			":account_number" => $account_number
 			]);
-			$newAccID = $r->fetch(PDO::FETCH_NUM);
+			
 			
 			
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
