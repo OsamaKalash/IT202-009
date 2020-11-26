@@ -42,10 +42,6 @@ if (isset($_POST["save"])) {
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	$world_id = $r["id"];
 	
-	
-	
-    //TODO add proper validation/checks
-	$myBal = "0.00";
     $act_src_id = $world_id;
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
