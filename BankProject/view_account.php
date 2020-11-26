@@ -73,7 +73,7 @@ if (isset($id)) {
 					<div>Memo: <?php safer_echo($r["memo"]); ?></div>
 					
 					
-					<div>Date Created: <?php safer_echo($r["created"]); ?></div>
+					<div>Date Created: <?php safer_echo($r["created"] + "\n"); ?></div>
 					
                 </div>
             <?php endforeach; ?>
