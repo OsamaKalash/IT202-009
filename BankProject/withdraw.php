@@ -51,6 +51,10 @@ if (isset($_POST["save"])) {
     $act_src_id = $world_id;
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
+	
+	
+	
+	
     //$action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
     //$user = get_user_id();
@@ -69,7 +73,10 @@ if (isset($_POST["save"])) {
 		$r = $stmt->fetch(PDO::FETCH_ASSOC);
 		$myBal = (float)$r["balance"];
 	
-	
+	if($amount > $myBal){
+		echo("You need to have at least 5 dollars in your account!");
+		exit;
+	}
 	
 	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :action_type, :memo, :expected_total)");
 	$r = $stmt->execute([
