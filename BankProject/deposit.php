@@ -59,11 +59,11 @@ if (isset($_POST["save"])) {
 		$r2 = $stmt->fetch(PDO::FETCH_ASSOC);
 		$worldBal = $r2["balance"];
 	
-	$stmt = $db->prepare("SELECT balance FROM Accounts WHERE id = :my_id");
-		$r = $stmt->execute([
+	$stmt2 = $db->prepare("SELECT balance FROM Accounts WHERE id = :my_id");
+		$r = $stmt2->execute([
 		":my_id" => $act_dest_id
 		]);
-		$r2 = $stmt->fetch(PDO::FETCH_ASSOC);
+		$r2 = $stmt2->fetch(PDO::FETCH_ASSOC);
 		$myBal = $r2["balance"];
 	
 	
