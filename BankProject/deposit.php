@@ -15,8 +15,7 @@ $items = get_acc_number();
 	<select name="act_dest_id">
 		<?php foreach($items as $index=>$row):?>
 			<option value="<?php echo $index+1;?>">
-				<?php echo $row['account_number'];
-				?>
+				<?php echo $row['account_number'];?>
 			</option>
 		<?php endforeach;?>
 	</select>
@@ -37,10 +36,6 @@ $items = get_acc_number();
 <?php
 if (isset($_POST["save"])) {
 	
-	
-    $act_num_id = $_POST["act_dest_id"];
-	$act_dest_num = $items[$act_num_id];
-	
 	$db = getDB();
 	$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
 	$stmt->execute();
@@ -48,17 +43,14 @@ if (isset($_POST["save"])) {
 	$world_id = $r["id"];
 	
 	$db = getDB();
-	$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = :dest_num ");
-	$stmt->execute([
-	":dest_num" => $act_dest_num
-	]);
+	$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
+	$stmt->execute();
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
-	$my_id = $r["id"];
+	$world_id = $r["id"];
 	
+    //TODO add proper validation/checks
     $act_src_id = $world_id;
-    
-	
-	
+    $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
     //$action_type = $_POST["action_type"];
 	$memo = $_POST["memo"];
@@ -73,7 +65,7 @@ if (isset($_POST["save"])) {
 	
 	$stmt = $db->prepare("SELECT balance FROM Accounts WHERE id = :my_id");
 		$r = $stmt->execute([
-		":my_id" => $my_id
+		":my_id" => $act_dest_id
 		]);
 		$r2 = $stmt->fetch(PDO::FETCH_ASSOC);
 		$myBal = $r2["balance"];
@@ -83,7 +75,7 @@ if (isset($_POST["save"])) {
 	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :memo, :expected_total)");
 	$r = $stmt->execute([
 		":act_src_id" => $act_src_id,
-		":act_dest_id" => $my_id,
+		":act_dest_id" => $act_dest_id,
 		":amount" => ($amount * -1),
 		":memo" => $memo,
 		":expected_total" => ($worldBal - $amount)
@@ -91,7 +83,7 @@ if (isset($_POST["save"])) {
 
 	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :memo, :expected_total)");
 	$r = $stmt->execute([
-		":act_src_id" => $my_id,
+		":act_src_id" => $act_dest_id,
 		":act_dest_id" => $act_src_id,
 		":amount" => $amount,
 		":memo" => $memo,
@@ -107,7 +99,7 @@ if (isset($_POST["save"])) {
 	$stmt = $db->prepare("UPDATE Accounts set balance=:balance where id=:id");
 	$r = $stmt->execute([
 	":balance" => ($myBal + $amount),
-	":id" => $my_id
+	":id" => $act_dest_id
 	]);
     
 	
