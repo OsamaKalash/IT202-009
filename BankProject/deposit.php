@@ -19,7 +19,7 @@
 	
 	<label>Choose an Account</label>
 	<select name="act_dest_id">
-		<?php foreach($items as $row):?>
+		<?php foreach($items as $index=>$row):?>
 			<option value="<?php echo $row["id"]?>">
 				<?php echo $row["account_number"]?>
 			</option>
