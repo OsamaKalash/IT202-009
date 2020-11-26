@@ -47,7 +47,6 @@ if (isset($_POST["save"])) {
 	$stmt->execute();
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	$world_id = $r["id"];
-	$myBal = 0.00;
     $act_src_id = $world_id;
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
@@ -66,7 +65,7 @@ if (isset($_POST["save"])) {
 		$r = $stmt2->execute([
 		":my_id" => $act_dest_id
 		]);
-		$r2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+		$r2 = (float)($stmt2->fetch(PDO::FETCH_ASSOC));
 		$myBal = $r2["balance"];
 	
 	
