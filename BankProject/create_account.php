@@ -31,7 +31,7 @@ if(isset($_POST["save"])){
 	$unique=false;
 	$count=0;
 	$valid=false;
-	$world_id = 1;
+	
 	switch($account_type){
 		case 0:
 			if($balance >= 5){
@@ -73,12 +73,16 @@ if(isset($_POST["save"])){
 		":user"=>$user
 	]);
 	
+	
+	$world_id = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
+	$world_id = $world_id->fetch(PDO::FETCH_NUM);
 	switch($account_type){
 		
 		case 0:
 		
 			$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
 			$newAccID = $newAccID->fetch(PDO::FETCH_NUM);
+			
 			
 			$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount,:action_type, :memo, :expected_total)");
 				$r = $stmt->execute([
