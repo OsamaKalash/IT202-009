@@ -74,7 +74,7 @@ if (isset($_POST["save"])) {
 		$myBal = (float)$r["balance"];
 	
 	if($amount > $myBal){
-		echo("You need to have at least 5 dollars in your account!");
+		echo("You can't withdraw more money than what the acccount has!");
 		exit;
 	}
 	
