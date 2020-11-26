@@ -123,6 +123,13 @@ if(isset($_POST["save"])){
 			break;
 	}
 	
+	$stmt = $db->prepare("UPDATE Accounts set balance=:balance where id=:id");
+	$r = $stmt->execute([
+	":balance" => ($worldBal - $balance),
+	":id" => $world_id
+	]);
+	
+	
 	if($r){
 		flash("Yay! Your account was created successfully!");
 	}
