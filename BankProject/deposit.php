@@ -19,9 +19,9 @@
 	
 	<label>Choose an Account</label>
 	<select name="act_dest_id">
-		<?php foreach($items as $r):?>
-			<option value="<?php echo $r["id"]?>">
-				<?php echo $r["account_number"]?>
+		<?php foreach($items as $row):?>
+			<option value="<?php echo $row["id"]?>">
+				<?php echo $row["account_number"]?>
 			</option>
 		<?php endforeach;?>
 	</select>
@@ -47,7 +47,7 @@ if (isset($_POST["save"])) {
 	$stmt->execute();
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	$world_id = $r["id"];
-	
+	$myBal = 0.00;
     $act_src_id = $world_id;
     $act_dest_id = $_POST["act_dest_id"];
     $amount = $_POST["amount"];
