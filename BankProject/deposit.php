@@ -71,20 +71,22 @@ if (isset($_POST["save"])) {
 	
 	
 	
-	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :memo, :expected_total)");
+	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :action_type, :memo, :expected_total)");
 	$r = $stmt->execute([
 		":act_src_id" => $act_src_id,
 		":act_dest_id" => $act_dest_id,
 		":amount" => ($amount * -1),
+		":action_type" => 0,
 		":memo" => $memo,
 		":expected_total" => ($worldBal - $amount)
 	]);
 
-	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :memo, :expected_total)");
+	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo,expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :action_type, :memo, :expected_total)");
 	$r = $stmt->execute([
 		":act_src_id" => $act_dest_id,
 		":act_dest_id" => $act_src_id,
 		":amount" => $amount,
+		":action_type" => 0,
 		":memo" => $memo,
 		":expected_total" => ($myBal + $amount)
 	]);   
