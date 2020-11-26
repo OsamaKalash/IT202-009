@@ -19,7 +19,7 @@ if (isset($id)) {
         flash($e[2]);
     }
 	
-	$stmt = $db->prepare("SELECT id, act_src_id, act_dest_id, amount, action_type, memo,expected_total from Transactions WHERE act_src_id = :id  LIMIT 10");
+	$stmt = $db->prepare("SELECT id, act_src_id, act_dest_id, amount, action_type, memo, created from Transactions WHERE act_src_id = :id  LIMIT 10");
     $r = $stmt->execute([":id" => $id]);
 	if ($r) {
         $transR = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -65,7 +65,7 @@ if (isset($id)) {
                 <div class="list-group-item">
 					<div>
                         <div>Transaction Type:</div>
-                        <div><?php safer_echo($r["action_type"]); ?></div>
+                        <div><?php getTransType($r["action_type"]); ?></div>
                     </div>	
 					<div>
                         <div>Amount:</div>
