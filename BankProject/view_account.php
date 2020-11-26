@@ -65,19 +65,19 @@ if (isset($id)) {
                 <div class="list-group-item">
 					<div>
                         <div>Transaction Type:</div>
-                        <div><?php safer_echo($transR["action_type"]); ?></div>
+                        <div><?php safer_echo($r["action_type"]); ?></div>
                     </div>	
 					<div>
                         <div>Amount:</div>
-                        <div><?php safer_echo($transR["amount"]); ?></div>
+                        <div><?php safer_echo($r["amount"]); ?></div>
                     </div>
 					<div>
 						<div>Memo:</div>
-						<div><?php safer_echo($transR["memo"]); ?></div>
+						<div><?php safer_echo($r["memo"]); ?></div>
 					</div>
 					<div>
 						<div>Date Created:</div>
-						<div><?php safer_echo($transR["created"]); ?></div>
+						<div><?php safer_echo($r["created"]); ?></div>
 					</div>
                 </div>
             <?php endforeach; ?>
