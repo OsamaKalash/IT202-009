@@ -19,8 +19,8 @@ require_once(__DIR__ . "/../lib/helpers.php");
         <?php if (is_logged_in()): ?>
 			<li><a href="create_account.php">Create Account</a></li>
 			<li><a href="list_accounts.php">Accounts</a></li>
-			<li><a href="#">Deposit</a></li>
-			<li><a href="#">Withdraw</a></li>
+			<li><a href="deposit.php">Deposit</a></li>
+			<li><a href="withdraw.php">Withdraw</a></li>
 			<li><a href="#">Transfer</a></li>
             <li><a href="profile.php">Profile</a></li>
             <li><a href="logout.php">Logout</a></li>
