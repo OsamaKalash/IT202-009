@@ -37,9 +37,9 @@ $items = get_acc_number();
 <?php
 if (isset($_POST["save"])) {
 	
-	$act_src_id = $world_id;
+	
     $act_num_id = $_POST["act_dest_id"];
-	$act_dest_num = $items["$act_num_id"];
+	$act_dest_num = $items[$act_num_id];
 	
 	$db = getDB();
 	$stmt = $db->prepare("SELECT id FROM Accounts WHERE account_number = '000000000000' ");
@@ -55,7 +55,7 @@ if (isset($_POST["save"])) {
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	$my_id = $r["id"];
 	
-    
+    $act_src_id = $world_id;
     
 	
 	
