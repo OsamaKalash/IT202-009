@@ -133,9 +133,9 @@ if(isset($_POST["save"])){
 	if($r){
 		flash("Yay! Your account was created successfully!");
 		
-		<?php
-			header('Location: view_account.php?id= . $newAccID');
-		?>
+		
+		header('Location: view_account.php?id= . $newAccID');
+		
 		
 	}
 	else{
