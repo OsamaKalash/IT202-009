@@ -3,7 +3,7 @@
 
 <?php
 
-$user = get_user_id();
+
 $items = get_acc_number();
 ?>
 
