@@ -3,7 +3,7 @@
 
 <?php
 
-$user = get_user_id();
+	$user = get_user_id();
 	$db = getDB();
 	$query = "SELECT DISTINCT account_number from Accounts WHERE user_id = :user";
 	$stmt = $db->prepare($query);
@@ -19,9 +19,9 @@ $user = get_user_id();
 	
 	<label>Choose an Account</label>
 	<select name="act_dest_id">
-		<?php foreach($items as $row):?>
-			<option value="<?php echo $row["id"]?>">
-				<?php echo $row["account_number"]?>
+		<?php foreach($items as $r):?>
+			<option value="<?php echo $r["id"]?>">
+				<?php echo $r["account_number"]?>
 			</option>
 		<?php endforeach;?>
 	</select>
