@@ -38,8 +38,7 @@ if(isset($_POST["save"])){
 				$valid =true;
 			}
 			else{
-				flash("You need to have at least 5 dollars in your account!");
-				flash("");
+				echo("You need to have at least 5 dollars in your account!");
 				exit;
 			}
 			break;
