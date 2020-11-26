@@ -81,7 +81,7 @@ if(isset($_POST["save"])){
 		case 0:
 		
 			$newAccID = $db->prepare("SELECT id FROM Accounts WHERE account_number = :account_number");
-			$r = $stmt->execute([
+			$r = $newAccID->execute([
 			":account_number" => $account_number
 			]);
 			$newAccID = $newAccID->fetch(PDO::FETCH_NUM);
