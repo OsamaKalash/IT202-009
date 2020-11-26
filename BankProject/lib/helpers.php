@@ -110,7 +110,7 @@ function get_acc_number(){
 	$r = $stmt->execute([
 	":user" => $user
 	]);
-	return $stmt->fetchAll();
+	return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 ?>
