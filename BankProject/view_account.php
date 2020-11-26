@@ -45,7 +45,7 @@ if (isset($id)) {
         <div class="card-body">
 		
             <div>
-				<div>Account Number: <?php safer_echo($result["account_number"]); ?></div>
+				<div><br>Account Number: <?php safer_echo($result["account_number"]); ?></br></div>
                 <div>Account Type: <?php getAccType($result["account_type"]); ?></div>
                 <div>Balance: <?php safer_echo($result["balance"]); ?></div>
                 <div>Date Opened: <?php safer_echo($result["opened_date"]); ?></div>
@@ -64,7 +64,7 @@ if (isset($id)) {
             <?php foreach ($transR as $r): ?>
                 <div class="card-body">
 					
-					<div>Transaction Type: <?php getTransType($r["action_type"]); ?></div>
+					<div><br>Transaction Type: <?php getTransType($r["action_type"]); ?></br></div>
                     
 					
 					<div>Amount: <?php safer_echo($r["amount"]); ?></div>
@@ -74,7 +74,7 @@ if (isset($id)) {
 					
 					
 					<div>Date Created: <?php safer_echo($r["created"]); ?></div>
-					<div><?php safer_echo("\n"); ?></div>
+					
                 </div>
             <?php endforeach; ?>
         </div>
