@@ -132,6 +132,11 @@ if(isset($_POST["save"])){
 	
 	if($r){
 		flash("Yay! Your account was created successfully!");
+		/*
+		<?php
+			header('Location: ViewAccount.php?id= . $accountID');
+		?>
+		*/
 	}
 	else{
 		
