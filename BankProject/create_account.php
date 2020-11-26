@@ -39,7 +39,7 @@ if(isset($_POST["save"])){
 			}
 			else{
 				flash("You need to have at least 5 dollars in your account!");
-				
+				exit;
 			}
 			break;
 	}
@@ -127,9 +127,8 @@ if(isset($_POST["save"])){
 	}
 	else{
 		
-		$e = $stmt->errorInfo();
-		flash("Error creating: " . var_export($e, true));
-		//flash("Uh oh! There was an error while creating your account!");
+		
+		flash("Uh oh! There was an error while creating your account!");
 	}
 }
 ?>
