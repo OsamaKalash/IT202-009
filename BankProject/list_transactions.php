@@ -24,12 +24,12 @@ if(isset($_GET["page"])){
 $db = getDB();
 
 $stmt = $db->prepare("SELECT account_number, balance, account_type FROM Accounts WHERE id = :id and user_id = :user");
-$r = $stmt->execute([
+$stmt->execute([
 ":id"=>$id,
 ":user" => get_user_id()
 ]);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if($r)
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+if($result)
 {
 	$account_number = (int)$result["account_number"];
 	$balance = (float)$result["balance"];
@@ -43,13 +43,14 @@ else
 
 
 $stmt = $db->prepare("SELECT count(*) as total FROM Transactions WHERE act_src_id = :id");
-$r = $stmt->execute([
+$stmt->execute([
 ":id"=>$id
 ]);
-$tResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if($r)
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$total = 0;
+if($result)
 {
-	$total = (int)$tResult["total"];
+	$total = (int)$result["total"];
 }
 $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
