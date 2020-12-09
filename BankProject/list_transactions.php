@@ -28,7 +28,7 @@ $stmt->execute([
 ":id"=>$id,
 ":user" => get_user_id()
 ]);
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if($result)
 {
 	$account_number = (int)$result["account_number"];
