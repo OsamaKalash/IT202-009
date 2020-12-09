@@ -20,16 +20,14 @@ if(isset($_GET["page"])){
 
     }
 }
-$account_number = 0;
-$account_type = 5;
-$balance = 0.00;
 
 $db = getDB();
+$user = get_user_id();
 
 $stmt = $db->prepare("SELECT account_number, balance, account_type FROM Accounts WHERE id = :id and user_id = :user");
 $res = $stmt->execute([
 ":id"=>$id,
-":user" => get_user_id()
+":user" => $user
 ]);
 
 if($res)
