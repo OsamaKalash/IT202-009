@@ -20,6 +20,9 @@ if(isset($_GET["page"])){
 
     }
 }
+$account_number = 0;
+$account_type = 5;
+$balance = 0.00;
 
 $db = getDB();
 
