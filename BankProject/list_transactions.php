@@ -34,7 +34,7 @@ $resultAcc = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $account_number = 0;
 $balance = 0.0;
 $account_type = 5;
-if($resultAcc)
+if(isset($resultAcc))
 {
 	
 	$account_number = $resultAcc["account_number"];
