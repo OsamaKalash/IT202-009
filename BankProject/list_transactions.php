@@ -28,13 +28,12 @@ $r = $stmt->execute([
 ":id"=>$id,
 ":user" => get_user_id()
 ]);
-
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if($r)
 {
-	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-	$account_number = $result["account_number"];
-	$balance = $result["balance"];
-	$account_type = $result["account_type"];
+	$account_number = (int)$result["account_number"];
+	$balance = (float)$result["balance"];
+	$account_type = (int)$result["account_type"];
 }
 
 else
@@ -47,10 +46,10 @@ $stmt = $db->prepare("SELECT count(*) as total FROM Transactions WHERE act_src_i
 $r = $stmt->execute([
 ":id"=>$id
 ]);
-
+$tResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if($r)
 {
-$total = (int)$result["total"];
+	$total = (int)$tResult["total"];
 }
 $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
