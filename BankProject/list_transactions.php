@@ -30,7 +30,7 @@ $stmt->execute([
 ":user" => $user
 ]);
 $resultAcc = [];
-$resultAcc = $stmt->fetch(PDO::FETCH_ASSOC);
+$resultAcc = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $account_number = 0;
 $balance = 0.0;
 $account_type = 5;
