@@ -42,14 +42,14 @@ if (isset($id)) {
             <p><b>Account Info:</b></p>
         </div>
 		
-        <div class="card-body">
+        <div class="list-group-item">
 		
             <div>
 				<div><br>Account Number: <?php safer_echo($result["account_number"]); ?></br></div>
                 <div>Account Type: <?php getAccType($result["account_type"]); ?></div>
                 <div>Balance: <?php safer_echo($result["balance"]); ?></div>
                 <div>Date Opened: <?php safer_echo($result["opened_date"]); ?></div>
-                <div><a type = "button" href="list_transactions.php?id=<?php safer_edcho( $r["id"]);?>">View Transaction History</a></div>
+                <div><a type = "button" href="list_transactions.php?id=<?php safer_echo( $r["id"]);?>">View Transaction History</a></div>
             </div>
 			
         </div>
