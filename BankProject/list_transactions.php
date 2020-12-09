@@ -1,14 +1,17 @@
 <?php require_once(__DIR__ . "/partials/nav.php"); ?>
 
+<?php if(isset($_GET["id"])){
+    $id = $_GET["id"];
+}
+?>
+
 <?php
 if (!is_logged_in()) {
     //this will redirect to login and kill the rest of this script (prevent it from executing)
     flash("You must be logged in to access this page");
     die(header("Location: login.php"));
 }
-if(isset($_GET["id"])){
-    $id = $_GET["id"];
-}
+
 
 $page = 1;
 $per_page = 10;
@@ -44,7 +47,7 @@ if(isset($resultAcc))
 
 else
 {
-	var_export($resultAcc);
+	$stmt->errorInfo();
 }
 
 
