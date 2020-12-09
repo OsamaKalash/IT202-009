@@ -79,6 +79,11 @@ if (isset($_POST["save"])) {
 		exit;
 	}
 	
+	if($act_src_id == $act_dest_id){
+		echo("You can't transfer money to the same account!");
+		exit;
+	}
+	
 	
 	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :action_type, :memo, :expected_total)");
 	$r = $stmt->execute([
