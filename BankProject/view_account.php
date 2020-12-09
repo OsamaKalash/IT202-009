@@ -49,14 +49,10 @@ if (isset($id)) {
                 <div>Account Type: <?php getAccType($result["account_type"]); ?></div>
                 <div>Balance: <?php safer_echo($result["balance"]); ?></div>
                 <div>Date Opened: <?php safer_echo($result["opened_date"]); ?></div>
-                
+                <a type = "button" href="list_transactions.php?id=<?php safer_edcho( $r["id"]);?>">View Transaction History</a>
             </div>
 			
         </div>
-		
-		<div>
-			<a type="button" href="list_transactions.php?id=<?php safer_echo($r['id']); ?>">View Transaction History</a>
-		</div>
 		
     </div>
 <?php else: ?>
