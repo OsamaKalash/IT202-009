@@ -27,13 +27,14 @@ $balance = 0.00;
 $db = getDB();
 
 $stmt = $db->prepare("SELECT account_number, balance, account_type FROM Accounts WHERE id = :id and user_id = :user");
-$stmt->execute([
+$res = $stmt->execute([
 ":id"=>$id,
 ":user" => get_user_id()
 ]);
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if($result)
+
+if($res)
 {
+	$result = $stmt->fetch(PDO::FETCH_ASSOC);
 	$account_number = (int)$result["account_number"];
 	$balance = (float)$result["balance"];
 	$account_type = (int)$result["account_type"];
@@ -75,8 +76,8 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div>
-    <h3>Transaction History</h3>
-	<h4>Account Number: <?php safer_echo($account_number); ?></h4>
+    <h3><b>Transaction History</b></h3>
+	<h4><br>Account Number: <?php safer_echo($account_number); ?></br></h4>
 	<h4>Balance: <?php safer_echo($balance); ?></h4>
 	<h4>Account Type: <?php safer_echo($account_type); ?></h4>
     <div>
