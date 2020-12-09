@@ -51,7 +51,7 @@ else
 }
 
 
-$stmt = $db->prepare("SELECT count(*) as total FROM Transactions WHERE act_src_id = :id");
+$stmt = $db->prepare("SELECT id, count(*) as total FROM Transactions WHERE act_src_id = :id");
 $stmt->execute([
 ":id"=>$id
 ]);
@@ -66,7 +66,7 @@ $offset = ($page-1) * $per_page;
 
 
 
-$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id LIMIT :offset, :count");
+$stmt = $db->prepare("SELECT id, action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id LIMIT :offset, :count");
 //need to use bindValue to tell PDO to create these as ints
 //otherwise it fails when being converted to strings (the default behavior)
 $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
