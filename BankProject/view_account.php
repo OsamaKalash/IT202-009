@@ -54,39 +54,9 @@ if (isset($id)) {
 			
         </div>
 		
-		<div class="card-title">
-            <p><b>Transaction History:</b></p>
-        </div>
-		
-		<div class="results">
-		<?php if (count($transR) > 0): ?>
-        <div class="list-group">
-            <?php foreach ($transR as $r): ?>
-                <div class="card-body">
-					
-					<div><br>Transaction Type: <?php getTransType($r["action_type"]); ?></br></div>
-                    
-					
-					<div>Amount: <?php safer_echo($r["amount"]); ?></div>
-                    
-					
-					<div>Memo: <?php safer_echo($r["memo"]); ?></div>
-					
-					
-					<div>Date Created: <?php safer_echo($r["created"]); ?></div>
-					
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php else: ?>
-        <p>No results</p>
-    <?php endif; ?>
-</div>
-
-
-
-
-
+		<div>
+			<a type="button" href="list_transactions.php?id=<?php safer_echo($r['id']); ?>">View Transaction History</a>
+		</div>
 		
     </div>
 <?php else: ?>
