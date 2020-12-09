@@ -31,7 +31,9 @@ $stmt->execute([
 ]);
 $resultAcc = [];
 $resultAcc = $stmt->fetch(PDO::FETCH_ASSOC);
-
+$account_number = 0;
+$balance = 0.0;
+$account_type = 5;
 if($resultAcc)
 {
 	
@@ -42,7 +44,7 @@ if($resultAcc)
 
 else
 {
-	flash("There was a problem fetching the results");
+	var_export($resultAcc);
 }
 
 
