@@ -25,17 +25,21 @@ $db = getDB();
 $user = get_user_id();
 
 $stmt = $db->prepare("SELECT account_number, balance, account_type FROM Accounts WHERE id = :id and user_id = :user");
-$res = $stmt->execute([
+$stmt->execute([
 ":id"=>$id,
 ":user" => $user
 ]);
-
-if($res)
+$resultAcc = [];
+$resultAcc = $stmt->fetch(PDO::FETCH_ASSOC);
+$account_number = 0;
+$balance = 0.0;
+$account_type = 5;
+if($resultAcc)
 {
-	$result = $stmt->fetch(PDO::FETCH_ASSOC);
-	$account_number = (int)$result["account_number"];
-	$balance = (float)$result["balance"];
-	$account_type = (int)$result["account_type"];
+	
+	$account_number = (int)$resultAcc["account_number"];
+	$balance = (float)$resultAcc["balance"];
+	$account_type = (int)$resultAcc["account_type"];
 }
 
 else
