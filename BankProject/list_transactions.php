@@ -5,6 +5,13 @@
 }
 ?>
 
+<form method="POST">
+    <input type = "datetime-local" name="query" value =  <?php echo $timestamp;?>/>
+	<input type = "datetime-local" name="query2" value = <?php echo $timestamp2;?>/>
+    <input type="submit" value="Search" name="search"/>
+</form>
+
+
 <?php
 if (!is_logged_in()) {
     //this will redirect to login and kill the rest of this script (prevent it from executing)
@@ -102,11 +109,6 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 }
 ?>
 
-<form method="POST">
-    <input type = "datetime-local" name="query" value =  <?php echo $timestamp;?>/>
-	<input type = "datetime-local" name="query2" value = <?php echo $timestamp2;?>/>
-    <input type="submit"/>
-</form>
 
 
 <div>
