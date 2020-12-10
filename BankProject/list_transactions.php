@@ -35,12 +35,12 @@ $r = $stmt->execute([
 
 $resultAcc = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-<?php if($resultAcc && count($resultAcc) > 0):?>
-    <?php foreach($resultAcc as $r):?>
+if($resultAcc && count($resultAcc) > 0):
+    foreach($resultAcc as $r):
 		$account_number = (int)$r["account_number"];
 		$baance = (float)$r["balance"];
 		$account_type = (int)$r["account_type"];
-	<?php endforeach;?>
+	endforeach;
 
 
 
