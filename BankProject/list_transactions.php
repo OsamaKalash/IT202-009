@@ -13,6 +13,7 @@ if (!is_logged_in()) {
 }
 
 $query = "";
+$query2 = "";
 $results = [];
 if (isset($_POST["query"])) {
     $query = $_POST["query"];
