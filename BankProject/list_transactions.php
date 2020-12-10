@@ -95,10 +95,9 @@ else{
 	$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
 	$stmt->bindValue(":count", $per_page, PDO::PARAM_INT);
 	$stmt->bindValue(":id", $id);
-	$stmt->execute([
-		":query1" => $query,
-		":query2" => $query2
-	]);
+	$stmt->bindValue(":query1", $query);
+	$stmt->bindValue(":query2", $query2);
+	$stmt->execute();
 	$e = $stmt->errorInfo();
 	if($e[0] != "00000"){
 		flash(var_export($e, true), "alert");
