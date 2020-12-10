@@ -27,25 +27,20 @@ if(isset($_GET["page"])){
 $db = getDB();
 $user = get_user_id();
 
-$stmt = $db->prepare("SELECT id, account_number, balance, account_type, user_id FROM Accounts WHERE id = :id and user_id = :user");
-$stmt->execute([
+$stmt = $db->prepare("SELECT account_number, balance, account_type FROM Accounts WHERE id = :id and user_id = :user");
+$r = $stmt->execute([
 ":id"=>$id,
 ":user" => $user
 ]);
 
 $resultAcc = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if(isset($resultAcc))
-{
-	$account_number = (int)$resultAcc["account_number"];
-	$balance = (float)$resultAcc["balance"];
-	$account_type = (int)$resultAcc["account_type"];
-}
+$account_number = (int)$resultAcc["account_number"];
+$baance = (float)$resultAcc["balance"];
+$account_type = (int)$resultAcc["account_type"];
 
-else
-{
-	flash($stmt->errorInfo());
-}
+
+
 
 
 $stmt = $db->prepare("SELECT count(*) as total FROM Transactions WHERE act_src_id = :id");
