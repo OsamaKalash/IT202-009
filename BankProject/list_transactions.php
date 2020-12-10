@@ -12,6 +12,23 @@ if (!is_logged_in()) {
     die(header("Location: login.php"));
 }
 
+$query = "";
+$results = [];
+if (isset($_POST["query"])) {
+    $query = $_POST["query"];
+	$_SESSION["query"] = $query;
+}
+else if(isset($_SESSION["query"])){
+	$query = $_SESSION["query"];
+}
+
+if (isset($_POST["query2"])) {
+    $query2 = $_POST["query2"];
+	$_SESSION["query2"] = $query2;
+}
+else if(isset($_SESSION["query2"])){
+	$query2 = $_SESSION["query2"];
+}
 
 $page = 1;
 $per_page = 10;
@@ -60,10 +77,8 @@ $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
 
 
-
+if (!isset($_POST["search"]) && empty($query)) {
 $stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id LIMIT :offset, :count");
-//need to use bindValue to tell PDO to create these as ints
-//otherwise it fails when being converted to strings (the default behavior)
 $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
 $stmt->bindValue(":count", $per_page, PDO::PARAM_INT);
 $stmt->bindValue(":id", $id);
@@ -73,7 +88,31 @@ if($e[0] != "00000"){
     flash(var_export($e, true), "alert");
 }
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+else{
+	$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id AND created BETWEEN :query1 AND :query2 LIMIT :offset, :count");
+	$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
+	$stmt->bindValue(":count", $per_page, PDO::PARAM_INT);
+	$stmt->bindValue(":id", $id);
+	$stmt->execute([
+		":query1" => $query,
+		":query2" => $query2
+	]);
+	$e = $stmt->errorInfo();
+	if($e[0] != "00000"){
+		flash(var_export($e, true), "alert");
+	}
+	
+	
+}
 ?>
+
+<form method="POST">
+    <input type = "datetime-local" name="query" value =  <?php echo $query;?>/>
+	<input type = "datetime-local" name="query2" value = <?php echo $query2;?>/>
+    <input type="submit"/>
+</form>
+
 
 <div>
     <h3><b>Transaction History</b></h3>
