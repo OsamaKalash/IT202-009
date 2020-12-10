@@ -34,14 +34,12 @@ $stmt->execute([
 ]);
 
 $resultAcc = $stmt->fetch(PDO::FETCH_ASSOC);
-$account_number = 0;
-$balance = 0.0;
-$account_type = 5;
+
 if(isset($resultAcc))
 {
-	$account_number = $resultAcc["account_number"];
-	$balance = $resultAcc["balance"];
-	$account_type = $resultAcc["account_type"];
+	$account_number = (int)$resultAcc["account_number"];
+	$balance = (float)$resultAcc["balance"];
+	$account_type = (int)$resultAcc["account_type"];
 }
 
 else
