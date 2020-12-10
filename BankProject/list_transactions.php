@@ -78,19 +78,8 @@ $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
 
 
-if (!isset($_POST["search"]) && empty($query)) {
-$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id LIMIT :offset, :count");
-$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
-$stmt->bindValue(":count", $per_page, PDO::PARAM_INT);
-$stmt->bindValue(":id", $id);
-$stmt->execute();
-$e = $stmt->errorInfo();
-if($e[0] != "00000"){
-    flash(var_export($e, true), "alert");
-}
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-else{
+if (isset($_POST["search"]) && !empty($query)) {
+
 	$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id AND created BETWEEN :query1 AND :query2 LIMIT :offset, :count");
 	$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
 	$stmt->bindValue(":count", $per_page, PDO::PARAM_INT);
@@ -104,7 +93,7 @@ else{
 	}
 	
 	
-}
+
 ?>
 
 <form method="POST">
