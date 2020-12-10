@@ -80,7 +80,7 @@ $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
 
 
-if (isset($_POST["search"]) && !empty($query)) {
+if (isset($_POST["search"]) && !empty($timestamp)) {
 
 	$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id AND created BETWEEN :query1 AND :query2 LIMIT :offset, :count");
 	$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
@@ -103,8 +103,8 @@ if (isset($_POST["search"]) && !empty($query)) {
 ?>
 
 <form method="POST">
-    <input type = "datetime-local" name="query" value =  <?php echo $query;?>/>
-	<input type = "datetime-local" name="query2" value = <?php echo $query2;?>/>
+    <input type = "datetime-local" name="query" value =  <?php echo $timestamp;?>/>
+	<input type = "datetime-local" name="query2" value = <?php echo $timestamp2;?>/>
     <input type="submit"/>
 </form>
 
@@ -132,12 +132,6 @@ if (isset($_POST["search"]) && !empty($query)) {
 		
     <?php endforeach;?>
 
-<?php else:?>
-<div>
-    <div>
-       This account has no transactions!
-    </div>
-</div>
 <?php endif;?>
     </div>
     </div>
