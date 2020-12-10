@@ -77,9 +77,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div>
     <h3><b>Transaction History</b></h3>
-	<h4><br>Account Number: <?php safer_echo($account_number); ?></br></h4>
-	<h4>Balance: <?php safer_echo($balance); ?></h4>
-	<h4>Account Type: <?php safer_echo($account_type); ?></h4>
+	<h4><br>Account Number: <?php echo($account_number); ?></br></h4>
+	<h4>Balance: <?php echo($balance); ?></h4>
+	<h4>Account Type: <?php echo($account_type); ?></h4>
     <div>
     <div>
 <?php if($results && count($results) > 0):?>
