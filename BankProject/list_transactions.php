@@ -86,8 +86,12 @@ if (isset($_POST["search"]) && !empty($query)) {
 	$stmt->bindValue(":id", $id);
 	$stmt->bindValue(":query1", $query);
 	$stmt->bindValue(":query2", $query2);
-	$stmt->execute();
+	$r = $stmt->execute();
 	$e = $stmt->errorInfo();
+	if($r){
+		$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+	}
 	if($e[0] != "00000"){
 		flash(var_export($e, true), "alert");
 	}
