@@ -38,7 +38,7 @@ $resultAcc = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if($resultAcc && count($resultAcc) > 0):
     foreach($resultAcc as $r):
 		$account_number = (int)$r["account_number"];
-		$baance = (float)$r["balance"];
+		$balance = (float)$r["balance"];
 		$account_type = (int)$r["account_type"];
 	endforeach;
 endif;
