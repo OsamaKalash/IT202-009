@@ -33,7 +33,7 @@ $stmt->execute([
 ":user" => $user
 ]);
 
-$resultAcc = $stmt->fetch(PDO::FETCH_ASSOC);
+$resultAcc = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if(isset($resultAcc))
 {
