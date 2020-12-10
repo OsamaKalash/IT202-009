@@ -27,7 +27,7 @@ if(isset($_GET["page"])){
 $db = getDB();
 $user = get_user_id();
 
-$stmt = $db->prepare("SELECT id, account_number, balance, account_type FROM Accounts WHERE id = :id and user_id = :user");
+$stmt = $db->prepare("SELECT id, account_number, balance, account_type, user_id FROM Accounts WHERE id = :id and user_id = :user");
 $stmt->execute([
 ":id"=>$id,
 ":user" => $user
