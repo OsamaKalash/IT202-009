@@ -17,18 +17,20 @@ $query2 = "";
 $results = [];
 if (isset($_POST["query"])) {
     $query = $_POST["query"];
-	$_SESSION["query"] = $query;
+	$timestamp = date('Y-m-d H:i:s',strtotime($query));
+	$_SESSION["timestamp"] = $timestamp;
 }
-else if(isset($_SESSION["query"])){
-	$query = $_SESSION["query"];
+else if(isset($_SESSION["timestamp"])){
+	$timestamp = $_SESSION["timestamp"];
 }
 
 if (isset($_POST["query2"])) {
     $query2 = $_POST["query2"];
-	$_SESSION["query2"] = $query2;
+	$timestamp2 = date('Y-m-d H:i:s',strtotime($query2));
+	$_SESSION["timestamp2"] = $timestamp2;
 }
-else if(isset($_SESSION["query2"])){
-	$query2 = $_SESSION["query2"];
+else if(isset($_SESSION["timestamp2"])){
+	$timestamp2 = $_SESSION["timestamp2"];
 }
 
 $page = 1;
@@ -84,8 +86,8 @@ if (isset($_POST["search"]) && !empty($query)) {
 	$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
 	$stmt->bindValue(":count", $per_page, PDO::PARAM_INT);
 	$stmt->bindValue(":id", $id);
-	$stmt->bindValue(":query1", $query);
-	$stmt->bindValue(":query2", $query2);
+	$stmt->bindValue(":query1", $timestamp);
+	$stmt->bindValue(":query2", $timestamp2);
 	$r = $stmt->execute();
 	$e = $stmt->errorInfo();
 	if($r){
