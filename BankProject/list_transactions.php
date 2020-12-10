@@ -110,7 +110,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <nav aria-label="Transaction History">
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php echo ($page-1) < 1?"disabled":"";?>">
-                    <a class="page-link" href="?id=<?php echo($id)?>&page=<?php echo $page-1;?>" tabindex="-1">Previous</a>
+                    <a class="page-link" href="?id=<?php echo($id)?>%page=<?php echo $page-1;?>" tabindex="-1">Previous</a>
                 </li>
                 <?php for($i = 0; $i < $total_pages; $i++):?>
                 <li class="page-item <?php echo ($page-1) == $i?"active":"";?>">
@@ -118,7 +118,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 				</li>
                 <?php endfor; ?>
                 <li class="page-item <?php echo ($page) >= $total_pages?"disabled":"";?>">
-                    <a class="page-link" href="?id=<?php echo($id)?>&page=<?php echo $page+1;?>">Next</a>
+                    <a class="page-link" href="?id=<?php echo($id)?>%page=<?php echo $page+1;?>">Next</a>
                 </li>
             </ul>
         </nav>
