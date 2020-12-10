@@ -18,9 +18,7 @@ if (isset($id)) {
         $e = $stmt->errorInfo();
         flash($e[2]);
     }
-    else {
-        flash("There was a problem fetching the results");
-    }
+	
 }
 
 
