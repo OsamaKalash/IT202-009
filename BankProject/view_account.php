@@ -38,7 +38,7 @@ if (isset($id)) {
                 <div>Balance: <?php safer_echo($result["balance"]); ?></div>
                 <div>Date Opened: <?php safer_echo($result["opened_date"]); ?></div>
                 <div>
-					<a type = "button" href="list_transactions.php?id=<?php safer_echo($r['id']);?>">View Transaction History</a>
+					<a type = "button" href="list_transactions.php?id=<?php safer_echo($result["id"]);?>">View Transaction History</a>
 				</div>
             </div>
 			
