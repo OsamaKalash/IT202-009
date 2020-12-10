@@ -108,8 +108,9 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 <form method="POST">
     <input type = "datetime-local" name="query" value =  <?php echo $timestamp;?>/>
 	<input type = "datetime-local" name="query2" value = <?php echo $timestamp2;?>/>
-    <input type="submit" value="Search" name="search"/>
+    <input type="button" class="button_active" onclick="location.href='&page=1&date=<? php echo($timestamp);?>=<? php echo($timestamp2); ?>"/>
 </form>
+<a href = 
 
 <div>
     <h3><b>Transaction History</b></h3>
