@@ -41,6 +41,7 @@ if($resultAcc && count($resultAcc) > 0):
 		$baance = (float)$r["balance"];
 		$account_type = (int)$r["account_type"];
 	endforeach;
+endif;
 
 
 
