@@ -32,14 +32,13 @@ $stmt->execute([
 ":id"=>$id,
 ":user" => $user
 ]);
-$resultAcc = [];
-$resultAcc = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$resultAcc = $stmt->fetch(PDO::FETCH_ASSOC);
 $account_number = 0;
 $balance = 0.0;
 $account_type = 5;
 if(isset($resultAcc))
 {
-	
 	$account_number = $resultAcc["account_number"];
 	$balance = $resultAcc["balance"];
 	$account_type = $resultAcc["account_type"];
@@ -47,11 +46,11 @@ if(isset($resultAcc))
 
 else
 {
-	$stmt->errorInfo();
+	flash($stmt->errorInfo());
 }
 
 
-$stmt = $db->prepare("SELECT id, count(*) as total FROM Transactions WHERE act_src_id = :id");
+$stmt = $db->prepare("SELECT count(*) as total FROM Transactions WHERE act_src_id = :id");
 $stmt->execute([
 ":id"=>$id
 ]);
@@ -66,7 +65,7 @@ $offset = ($page-1) * $per_page;
 
 
 
-$stmt = $db->prepare("SELECT id, action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id LIMIT :offset, :count");
+$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id LIMIT :offset, :count");
 //need to use bindValue to tell PDO to create these as ints
 //otherwise it fails when being converted to strings (the default behavior)
 $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);

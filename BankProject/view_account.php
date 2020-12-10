@@ -18,12 +18,6 @@ if (isset($id)) {
         $e = $stmt->errorInfo();
         flash($e[2]);
     }
-	
-	$stmt = $db->prepare("SELECT id, act_src_id, act_dest_id, amount, action_type, memo, created from Transactions WHERE act_src_id = :id  LIMIT 10");
-    $r = $stmt->execute([":id" => $id]);
-	if ($r) {
-        $transR = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
     else {
         flash("There was a problem fetching the results");
     }
