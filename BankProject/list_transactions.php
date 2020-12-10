@@ -93,7 +93,7 @@ if (isset($_POST["search"]) && !empty($query)) {
 	}
 	
 	
-
+}
 ?>
 
 <form method="POST">
