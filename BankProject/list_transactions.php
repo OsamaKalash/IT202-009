@@ -5,11 +5,7 @@
 }
 ?>
 
-<form method="POST">
-    <input type = "datetime-local" name="query" value =  <?php echo $timestamp;?>/>
-	<input type = "datetime-local" name="query2" value = <?php echo $timestamp2;?>/>
-    <input type="submit" value="Search" name="search"/>
-</form>
+
 
 
 <?php
@@ -109,7 +105,11 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 }
 ?>
 
-
+<form method="POST">
+    <input type = "datetime-local" name="query" value =  <?php echo $timestamp;?>/>
+	<input type = "datetime-local" name="query2" value = <?php echo $timestamp2;?>/>
+    <input type="submit" value="Search" name="search"/>
+</form>
 
 <div>
     <h3><b>Transaction History</b></h3>
