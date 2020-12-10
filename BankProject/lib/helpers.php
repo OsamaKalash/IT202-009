@@ -32,6 +32,20 @@ function get_email() {
     return "";
 }
 
+function get_last_name() {
+    if (is_logged_in() && isset($_SESSION["user"]["last_name"])) {
+        return $_SESSION["user"]["last_name"];
+    }
+    return "";
+}
+
+function get_first_name() {
+    if (is_logged_in() && isset($_SESSION["user"]["first_name"])) {
+        return $_SESSION["user"]["first_name"];
+    }
+    return "";
+}
+
 function get_user_id() {
     if (is_logged_in() && isset($_SESSION["user"]["id"])) {
         return $_SESSION["user"]["id"];
@@ -108,10 +122,8 @@ function getTransType($n) {
 }
 
 
-
 function get_dropdown_items(){
-	//require("config.php");
-	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+
 	$db = getDB();
 	$query = "SELECT DISTINCT account_number from Accounts";
 	$stmt = $db->prepare($query);
@@ -120,8 +132,7 @@ function get_dropdown_items(){
 }
 
 function get_acc_number(){
-	//require("config.php");
-	//$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+
 	$user = get_user_id();
 	$db = getDB();
 	$query = "SELECT DISTINCT account_number from Accounts WHERE user_id = :user";
