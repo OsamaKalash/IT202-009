@@ -1,5 +1,4 @@
-ALTER TABLE Users(
-	DROP first_name,
-    ADD first_name varchar(60), 
-	last_name varchar(60);
-);
+ALTER TABLE Users
+	DROP COLUMN first_name;
+    ADD COLUMN (first_name varchar(60) default '', 
+	last_name varchar(60) default '');
