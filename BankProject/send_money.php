@@ -65,7 +65,7 @@ if (isset($_POST["save"])) {
 	$stmt->execute([
 	":id" => $receive_id,
 	":digits" => $last_digits
-	);
+	]);
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	
 	$act_dest_id = $r["id"];
