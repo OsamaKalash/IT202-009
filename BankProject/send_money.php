@@ -64,8 +64,8 @@ if (isset($_POST["save"])) {
 	$last_digits = $_POST["last_digits"];
 	}
 	else{
-		flash("We couldn't find a user with that last name!");
-		//exit;
+		echo("We couldn't find a user with that last name!");
+		exit;
 	}
     
 	$stmt = $db->prepare("SELECT id FROM Accounts WHERE user_id = :id AND RIGHT(account_number,4) = :digits");
@@ -78,8 +78,8 @@ if (isset($_POST["save"])) {
 		$act_dest_id = $r["id"];
 	}
 	else{
-		flash("There was an error while finding the receiver's account!");
-		//exit;
+		echo("There was an error while finding the receiver's account!");
+		exit;
 	}
 	$stmt = $db->prepare("SELECT balance FROM Accounts WHERE id = :dest_id");
 		$r = $stmt->execute([
@@ -96,8 +96,8 @@ if (isset($_POST["save"])) {
 		$myBal = (float)$r["balance"];
 	
 	if($amount > $myBal){
-		flash("You can't send more money than what the acccount has!");
-		//exit;
+		echo("You can't send more money than what the acccount has!");
+		exit;
 	}
 	
 	$stmt = $db->prepare("INSERT INTO Transactions (act_src_id, act_dest_id, amount, action_type, memo, expected_total) VALUES(:act_src_id, :act_dest_id, :amount, :action_type, :memo, :expected_total)");
