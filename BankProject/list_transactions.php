@@ -106,8 +106,8 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 ?>
 
 <form method="POST">
-    <input type = "datetime-local" name="query" value =  <?php echo $timestamp;?>/>
-	<input type = "datetime-local" name="query2" value = <?php echo $timestamp2;?>/>
+    <input type = "datetime-local" name="query" value = "<?php echo $timestamp;?>"/>
+	<input type = "datetime-local" name="query2" value = "<?php echo $timestamp2;?>"/>
     <input type="submit" value="Search" name="search"/>
 </form>
 
@@ -115,7 +115,7 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
     <h3><b>Transaction History</b></h3>
 	<h4><br>Account Number: <?php echo($account_number); ?></br></h4>
 	<h4>Balance: <?php echo($balance); ?></h4>
-	<h4>Account Type: <?php echo($account_type); ?></h4>
+	<h4>Account Type: <?php getAccType($account_type); ?></h4>
     <div>
     <div>
 <?php if($results && count($results) > 0):?>
