@@ -52,7 +52,7 @@ if (isset($_POST["save"])) {
 	$stmt = $db->prepare("SELECT id FROM Users WHERE last_name = :last");
 	$stmt->execute([
 	":last" => $_POST["input_last_name"]
-	);
+	]);
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	$receive_id = $r["id"];
     $act_src_id = $_POST["act_src_id"];
