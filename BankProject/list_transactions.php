@@ -128,8 +128,6 @@ if (isset($_POST["search"]) && !empty($timestamp) && !empty($action_filter)) {
 	<label>Date/Time</label>
     <input type = "datetime-local" name="query" value = "<?php echo $timestamp;?>"/>
 	<input type = "datetime-local" name="query2" value = "<?php echo $timestamp2;?>"/>
-    <input type="submit" value="Search" name="search"/>
-	
 	<label>Transaction Type</label>
 	<select name="action_filter">
 		<option value="0">Deposit</option>
@@ -138,7 +136,7 @@ if (isset($_POST["search"]) && !empty($timestamp) && !empty($action_filter)) {
 		<option value="3">Ext-transfer</option>
 	</select>
 </form>
-
+<input type="submit" value="Search" name="search"/>
 
 
 <div>
