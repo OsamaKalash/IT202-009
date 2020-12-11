@@ -135,8 +135,9 @@ if (isset($_POST["search"]) && !empty($timestamp) && !empty($action_filter)) {
 		<option value="2">Transfer</option>
 		<option value="3">Ext-transfer</option>
 	</select>
+	<input type="submit" value="Search" name="search"/>
 </form>
-<input type="submit" value="Search" name="search"/>
+
 
 
 <div>
