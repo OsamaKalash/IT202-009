@@ -145,8 +145,8 @@ if (isset($_POST["search"]) && !empty($timestamp) && !empty($action_filter)) {
 	<h4><br>Account Number: <?php echo($account_number); ?></br></h4>
 	<h4>Balance: <?php echo($balance); ?></h4>
 	<h4>Account Type: <?php getAccType($account_type); ?></h4>
-    <div>
-    <div>
+    
+</div>
 <?php if($results && count($results) > 0):?>
     <?php foreach($results as $r):?>
         <div class = "card-body">
