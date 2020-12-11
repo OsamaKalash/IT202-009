@@ -50,26 +50,38 @@ if (isset($_POST["save"])) {
 	$db = getDB();
 	
 	$stmt = $db->prepare("SELECT id FROM Users WHERE last_name = :last");
-	$stmt->execute([
+	$e = $stmt->execute([
 	":last" => $_POST["input_last_name"]
 	]);
+	
+	if($e)
+	{
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	$receive_id = $r["id"];
     $act_src_id = $_POST["act_src_id"];
 	$amount = $_POST["amount"];
 	$memo = $_POST["memo"];
 	$last_digits = $_POST["last_digits"];
-	
+	}
+	else{
+		echo("We couldn't find a user with that last name!");
+		exit;
+	}
     
 	$stmt = $db->prepare("SELECT id FROM Accounts WHERE user_id = :id AND RIGHT(account_number,4) = :digits");
-	$stmt->execute([
+	$e = $stmt->execute([
 	":id" => $receive_id,
 	":digits" => $last_digits
 	]);
-	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-	$act_dest_id = $r["id"];
-	
+	if($e){
+		$r = $stmt->fetch(PDO::FETCH_ASSOC);
+		$act_dest_id = $r["id"];
+	}
+	else{
+		echo("There was an error while finding the receiver's account!");
+		exit;
+	}
 	$stmt = $db->prepare("SELECT balance FROM Accounts WHERE id = :dest_id");
 		$r = $stmt->execute([
 		":dest_id" => $act_dest_id
