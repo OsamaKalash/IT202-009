@@ -36,6 +36,14 @@ else if(isset($_SESSION["timestamp2"])){
 	$timestamp2 = $_SESSION["timestamp2"];
 }
 
+if (isset($_POST["action_filter"])) {
+    $action_filter= $_POST["action_filter"];
+	$_SESSION["action_filter"] = $action_filter;
+}
+else if(isset($_SESSION["action_filter"])){
+	$action_filter = $_SESSION["action_filter"];
+}
+
 $page = 1;
 $per_page = 10;
 if(isset($_GET["page"])){
@@ -93,12 +101,7 @@ if($result)
 $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
 
-if (isset($_POST["save"])){
-	$action_filter=$_POST["action_filter"];
-}
-
-
-if (isset($_POST["search"]) && !empty($timestamp)) {
+if (isset($_POST["search"]) && !empty($timestamp) && !empty($action_filter)) {
 
 	$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id AND action_type = :action AND created BETWEEN :query1 AND :query2 LIMIT :offset, :count");
 	$stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
@@ -122,6 +125,7 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 ?>
 
 <form method="POST">
+	<label>Date/Time</label>
     <input type = "datetime-local" name="query" value = "<?php echo $timestamp;?>"/>
 	<input type = "datetime-local" name="query2" value = "<?php echo $timestamp2;?>"/>
     <input type="submit" value="Search" name="search"/>
