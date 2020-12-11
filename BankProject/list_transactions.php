@@ -163,6 +163,7 @@ if (isset($_POST["search"]) && !empty($timestamp) && !empty($action_filter)) {
     <?php endforeach;?>
 
 <?php endif;?>
+<?php /*
     </div>
     </div>
         <nav aria-label="Transaction History">
@@ -181,4 +182,6 @@ if (isset($_POST["search"]) && !empty($timestamp) && !empty($action_filter)) {
             </ul>
         </nav>
     </div>
+	*/
+	?>
 <?php require(__DIR__ . "/partials/flash.php");
