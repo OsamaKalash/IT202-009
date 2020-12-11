@@ -102,7 +102,7 @@ function getTransType($n) {
             echo "Transfer";
             break;
 		case 3:
-			echo "Ext-Transfer"
+			echo "Ext-Transfer";
 			break;
         default:
             echo "Unsupported type: " . safer_echo($n);
