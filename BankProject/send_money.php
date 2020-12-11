@@ -125,11 +125,11 @@ if (isset($_POST["save"])) {
 	
 	
     if ($r) {
-        flash("Your withdrawal was successful!");
+        flash("Your money was sent successfully!");
     }
     else {
         //$e = $stmt->errorInfo();
-        flash("Uh oh, there was an error while completing your withdrawal!");
+        flash("Uh oh, there was an error while sending your money!");
     }
 }
 
