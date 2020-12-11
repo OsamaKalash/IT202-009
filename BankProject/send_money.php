@@ -103,7 +103,7 @@ if (isset($_POST["save"])) {
 	$r = $stmt->execute([
 		":act_src_id" => $act_dest_id,
 		":act_dest_id" => $act_src_id,
-		":amount" => ($amount,
+		":amount" => ($amount),
 		":action_type" => 3,
 		":memo" => $memo,
 		":expected_total" => ($destBal + $amount)
