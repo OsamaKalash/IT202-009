@@ -10,13 +10,14 @@ if (!has_role("Admin")) {
 <form method="POST">
 	
 	<label>Account Number</label>
-	<input name="account_number" type="number" max="999999999999" min="1"/>
+	<input name="account_number" type="number" max="999999999999" min="0"/>
 	
 	<label>Account Type</label>
 	<select name="account_type">
 		<option value="0">Checking</option>
 		<option value="1">Saving</option>
 		<option value="2">Loan</option>
+		<option value="3">World</option>
 	</select>
 	
 	<label>Balance</label>
