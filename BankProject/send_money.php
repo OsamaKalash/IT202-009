@@ -53,10 +53,10 @@ if (isset($_POST["save"])) {
 	$e = $stmt->execute([
 	":last" => $_POST["input_last_name"]
 	]);
-	
-	if($e)
-	{
 	$r = $stmt->fetch(PDO::FETCH_ASSOC);
+	if($r)
+	{
+	
 	$receive_id = $r["id"];
     $act_src_id = $_POST["act_src_id"];
 	$amount = $_POST["amount"];
@@ -64,7 +64,7 @@ if (isset($_POST["save"])) {
 	$last_digits = $_POST["last_digits"];
 	}
 	else{
-		echo("We couldn't find a user with that last name!");
+		flash("We couldn't find a user with that last name!");
 		exit;
 	}
     
@@ -73,13 +73,12 @@ if (isset($_POST["save"])) {
 	":id" => $receive_id,
 	":digits" => $last_digits
 	]);
-	
-	if($e){
-		$r = $stmt->fetch(PDO::FETCH_ASSOC);
+	$r = $stmt->fetch(PDO::FETCH_ASSOC);
+	if($r){
 		$act_dest_id = $r["id"];
 	}
 	else{
-		echo("There was an error while finding the receiver's account!");
+		flash("There was an error while finding the receiver's account!");
 		exit;
 	}
 	$stmt = $db->prepare("SELECT balance FROM Accounts WHERE id = :dest_id");
@@ -97,7 +96,7 @@ if (isset($_POST["save"])) {
 		$myBal = (float)$r["balance"];
 	
 	if($amount > $myBal){
-		echo("You can't send more money than what the acccount has!");
+		flash("You can't send more money than what the acccount has!");
 		exit;
 	}
 	
