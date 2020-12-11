@@ -63,9 +63,60 @@ if (isset($_POST["saved"])) {
             $newUsername = $username;
         }
     }
+	$newFName = get_first_name();
+    if (get_first_name() != $_POST["first_name"]) {
+        //TODO we'll need to check if the email is available
+        $first_name = $_POST["first_name"];
+        $stmt = $db->prepare("SELECT COUNT(1) as InUse from Users where first_name = :fName");
+        $stmt->execute([":fName" => $first_name]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $inUse = 1;//default it to a failure scenario
+        if ($result && isset($result["InUse"])) {
+            try {
+                $inUse = intval($result["InUse"]);
+            }
+            catch (Exception $e) {
+
+            }
+        }
+        if ($inUse > 0) {
+            flash("First name already in use");
+            //for now we can just stop the rest of the update
+            $isValid = false;
+        }
+        else {
+            $newFName = $first_name;
+        }
+    }
+	
+	$newLName = get_last_name();
+    if (get_last_name() != $_POST["last_name"]) {
+        //TODO we'll need to check if the email is available
+        $last_name = $_POST["last_name"];
+        $stmt = $db->prepare("SELECT COUNT(1) as InUse from Users where last_name = :LName");
+        $stmt->execute([":LName" => $last_name]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $inUse = 1;//default it to a failure scenario
+        if ($result && isset($result["InUse"])) {
+            try {
+                $inUse = intval($result["InUse"]);
+            }
+            catch (Exception $e) {
+
+            }
+        }
+        if ($inUse > 0) {
+            flash("Last name already in use");
+            //for now we can just stop the rest of the update
+            $isValid = false;
+        }
+        else {
+            $newLName = $last_name;
+        }
+    }
     if ($isValid) {
-        $stmt = $db->prepare("UPDATE Users set email = :email, username= :username where id = :id");
-        $r = $stmt->execute([":email" => $newEmail, ":username" => $newUsername, ":id" => get_user_id()]);
+        $stmt = $db->prepare("UPDATE Users set email = :email, username= :username, first_name = :fName, last_name = :lName where id = :id");
+        $r = $stmt->execute([":email" => $newEmail, ":username" => $newUsername, ":id" => get_user_id(), ":fName" => $newFName, ":lName" => $newLName]);
         if ($r) {
             flash("Updated profile");
         }
@@ -90,7 +141,7 @@ if (isset($_POST["saved"])) {
             }
         }
 //fetch/select fresh data in case anything changed
-        $stmt = $db->prepare("SELECT email, username from Users WHERE id = :id LIMIT 1");
+        $stmt = $db->prepare("SELECT email, username, first_name, last_name from Users WHERE id = :id LIMIT 1");
         $stmt->execute([":id" => get_user_id()]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($result) {
@@ -99,6 +150,8 @@ if (isset($_POST["saved"])) {
             //let's update our session too
             $_SESSION["user"]["email"] = $email;
             $_SESSION["user"]["username"] = $username;
+			$_SESSION["user"]["first_name"] = $first_name;
+			$_SESSION["user"]["last_name"] = $last_name;
         }
     }
     else {
@@ -110,6 +163,10 @@ if (isset($_POST["saved"])) {
 ?>
 
     <form method="POST">
+		<label for="first_name">First Name</label>
+        <input type="first_name" name="first_name" value="<?php safer_echo(get_first_name()); ?>"/>
+		<label for="last_name">Last Name</label>
+        <input type="last_name" name="last_name" value="<?php safer_echo(get_last_name()); ?>"/>
         <label for="email">Email</label>
         <input type="email" name="email" value="<?php safer_echo(get_email()); ?>"/>
         <label for="username">Username</label>
