@@ -46,6 +46,17 @@ if(isset($_GET["page"])){
 
     }
 }
+$date=1;
+if(isset($_GET["date"])){
+    try {
+        $date = (int)$_GET["date"];
+    }
+    catch(Exception $e){
+
+    }
+}
+
+
 
 $db = getDB();
 $user = get_user_id();
@@ -140,7 +151,7 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
         <nav aria-label="Transaction History">
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php echo ($page-1) < 1?"disabled":"";?>">
-                    <a class="page-link" href="?id=<?php echo($id)?>&page=<?php echo $page-1;?>&date=<?php echo $page-1;?>" tabindex="-1">Previous</a>
+                    <a class="page-link" href="?id=<?php echo($id)?>&page=<?php echo $page-1;?>&date=<?php echo $date-1;?>" tabindex="-1">Previous</a>
                 </li>
                 <?php for($i = 0; $i < $total_pages; $i++):?>
                 <li class="page-item <?php echo ($page-1) == $i?"active":"";?>">
@@ -148,7 +159,7 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 				</li>
                 <?php endfor; ?>
                 <li class="page-item <?php echo ($page) >= $total_pages?"disabled":"";?>">
-                    <a class="page-link" href="?id=<?php echo($id)?>&page=<?php echo $page+1;?>&date=<?php echo $page+1;?>">Next</a>
+                    <a class="page-link" href="?id=<?php echo($id)?>&page=<?php echo $page+1;?>&date=<?php echo $date+1;?>">Next</a>
                 </li>
             </ul>
         </nav>
