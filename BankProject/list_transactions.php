@@ -93,6 +93,10 @@ if($result)
 $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
 
+if (isset($_POST["save"])){
+	$action_filter=$_POST["action_filter"];
+}
+
 
 if (isset($_POST["search"]) && !empty($timestamp)) {
 
@@ -131,9 +135,7 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 	</select>
 </form>
 
-<?php 
-$action_filter=$_POST["action_filter"];
-?>
+
 
 <div>
     <h3><b>Transaction History</b></h3>
