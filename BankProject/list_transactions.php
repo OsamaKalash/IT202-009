@@ -93,7 +93,7 @@ if($result)
 $total_pages = ceil($total / $per_page);
 $offset = ($page-1) * $per_page;
 
-$action_filter=$_POST["action_filter"];
+
 if (isset($_POST["search"]) && !empty($timestamp)) {
 
 	$stmt = $db->prepare("SELECT action_type, amount, memo, created FROM Transactions WHERE act_src_id = :id AND action_type = :action AND created BETWEEN :query1 AND :query2 LIMIT :offset, :count");
@@ -131,7 +131,9 @@ if (isset($_POST["search"]) && !empty($timestamp)) {
 	</select>
 </form>
 
-
+<?php 
+$action_filter=$_POST["action_filter"];
+?>
 
 <div>
     <h3><b>Transaction History</b></h3>
